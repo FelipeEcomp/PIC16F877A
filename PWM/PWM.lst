@@ -1,0 +1,1137 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.83 build 10920 
+                                                                                               Wed Nov 06 21:45:19 2013
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 10920"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F877A
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNROOT	_main
+    43                           	FNCALL	intlevel1,_Interrupcao
+    44                           	global	intlevel1
+    45                           	FNROOT	intlevel1
+    46                           	global	_duty
+    47                           	global	_CCPR1H
+    48                           psect	text76,local,class=CODE,delta=2
+    49                           global __ptext76
+    50  0000                     __ptext76:
+    51  0016                     _CCPR1H	set	22
+    52                           	global	_CCPR1L
+    53  0015                     _CCPR1L	set	21
+    54                           	global	_TMR2
+    55  0011                     _TMR2	set	17
+    56                           	global	_CARRY
+    57  0018                     _CARRY	set	24
+    58                           	global	_CCP1M0
+    59  00B8                     _CCP1M0	set	184
+    60                           	global	_CCP1M1
+    61  00B9                     _CCP1M1	set	185
+    62                           	global	_CCP1M2
+    63  00BA                     _CCP1M2	set	186
+    64                           	global	_CCP1M3
+    65  00BB                     _CCP1M3	set	187
+    66                           	global	_CCP1X
+    67  00BD                     _CCP1X	set	189
+    68                           	global	_CCP1Y
+    69  00BC                     _CCP1Y	set	188
+    70                           	global	_GIE
+    71  005F                     _GIE	set	95
+    72                           	global	_PEIE
+    73  005E                     _PEIE	set	94
+    74                           	global	_RB1
+    75  0031                     _RB1	set	49
+    76                           	global	_RB2
+    77  0032                     _RB2	set	50
+    78                           	global	_RB3
+    79  0033                     _RB3	set	51
+    80                           	global	_T2CKPS0
+    81  0090                     _T2CKPS0	set	144
+    82                           	global	_T2CKPS1
+    83  0091                     _T2CKPS1	set	145
+    84                           	global	_TMR2IF
+    85  0061                     _TMR2IF	set	97
+    86                           	global	_TMR2ON
+    87  0092                     _TMR2ON	set	146
+    88                           	global	_TOUTPS0
+    89  0093                     _TOUTPS0	set	147
+    90                           	global	_TOUTPS1
+    91  0094                     _TOUTPS1	set	148
+    92                           	global	_TOUTPS2
+    93  0095                     _TOUTPS2	set	149
+    94                           	global	_TOUTPS3
+    95  0096                     _TOUTPS3	set	150
+    96                           	global	_PR2
+    97  0092                     _PR2	set	146
+    98                           	global	_TRISA
+    99  0085                     _TRISA	set	133
+   100                           	global	_TRISB
+   101  0086                     _TRISB	set	134
+   102                           	global	_TMR2IE
+   103  0461                     _TMR2IE	set	1121
+   104                           	global	_TRISB1
+   105  0431                     _TRISB1	set	1073
+   106                           	global	_TRISB2
+   107  0432                     _TRISB2	set	1074
+   108                           	global	_TRISB3
+   109  0433                     _TRISB3	set	1075
+   110                           	global	_TRISC2
+   111  043A                     _TRISC2	set	1082
+   112                           	global	_EEADR
+   113  010D                     _EEADR	set	269
+   114                           	global	_EEDATA
+   115  010C                     _EEDATA	set	268
+   116                           	global	_EECON1
+   117  018C                     _EECON1	set	396
+   118                           	global	_EECON2
+   119  018D                     _EECON2	set	397
+   120                           	global	_RD
+   121  0C60                     _RD	set	3168
+   122                           	global	_WR
+   123  0C61                     _WR	set	3169
+   124                           	global	_WREN
+   125  0C62                     _WREN	set	3170
+   126                           	file	"PWM.as"
+   127                           	line	#
+   128                           psect cinit,class=CODE,delta=2
+   129                           global start_initialization
+   130  0160                     start_initialization:
+   131                           
+   132                           psect	bssCOMMON,class=COMMON,space=1
+   133                           global __pbssCOMMON
+   134  0077                     __pbssCOMMON:
+   135  0077                     _duty:
+   136  0077                            ds      1
+   137                           
+   138                           ; Clear objects allocated to COMMON
+   139                           psect cinit,class=CODE,delta=2
+   140  0160  01F7               	clrf	((__pbssCOMMON)+0)&07Fh
+   141                           psect cinit,class=CODE,delta=2
+   142                           global end_of_initialization
+   143                           
+   144                           ;End of C runtime variable initialization code
+   145                           
+   146  0161                     end_of_initialization:
+   147  0161  0183               clrf status
+   148  0162  120A  118A  2815   ljmp _main	;jump to C main() function
+   149                           psect	cstackCOMMON,class=COMMON,space=1
+   150                           global __pcstackCOMMON
+   151  0070                     __pcstackCOMMON:
+   152                           	global	?_Interrupcao
+   153  0070                     ?_Interrupcao:	; 0 bytes @ 0x0
+   154                           	global	??_Interrupcao
+   155  0070                     ??_Interrupcao:	; 0 bytes @ 0x0
+   156                           	global	?_main
+   157  0070                     ?_main:	; 0 bytes @ 0x0
+   158  0070                     	ds	4
+   159                           	global	??_main
+   160  0074                     ??_main:	; 0 bytes @ 0x4
+   161  0074                     	ds	3
+   162 ;;Data sizes: Strings 0, constant 0, data 0, bss 1, persistent 0 stack 0
+   163 ;;Auto spaces:   Size  Autos    Used
+   164 ;; COMMON          14      7       8
+   165 ;; BANK0           80      0       0
+   166 ;; BANK1           80      0       0
+   167 ;; BANK3           96      0       0
+   168 ;; BANK2           96      0       0
+   169                           
+   170 ;;
+   171 ;; Pointer list with targets:
+   172                           
+   173                           
+   174                           
+   175 ;;
+   176 ;; Critical Paths under _main in COMMON
+   177 ;;
+   178 ;;   None.
+   179 ;;
+   180 ;; Critical Paths under _Interrupcao in COMMON
+   181 ;;
+   182 ;;   None.
+   183 ;;
+   184 ;; Critical Paths under _main in BANK0
+   185 ;;
+   186 ;;   None.
+   187 ;;
+   188 ;; Critical Paths under _Interrupcao in BANK0
+   189 ;;
+   190 ;;   None.
+   191 ;;
+   192 ;; Critical Paths under _main in BANK1
+   193 ;;
+   194 ;;   None.
+   195 ;;
+   196 ;; Critical Paths under _Interrupcao in BANK1
+   197 ;;
+   198 ;;   None.
+   199 ;;
+   200 ;; Critical Paths under _main in BANK3
+   201 ;;
+   202 ;;   None.
+   203 ;;
+   204 ;; Critical Paths under _Interrupcao in BANK3
+   205 ;;
+   206 ;;   None.
+   207 ;;
+   208 ;; Critical Paths under _main in BANK2
+   209 ;;
+   210 ;;   None.
+   211 ;;
+   212 ;; Critical Paths under _Interrupcao in BANK2
+   213 ;;
+   214 ;;   None.
+   215                           
+   216 ;;
+   217 ;;Main: autosize = 0, tempsize = 3, incstack = 0, save=0
+   218 ;;
+   219                           
+   220 ;;
+   221 ;;Call Graph Tables:
+   222 ;;
+   223 ;; ---------------------------------------------------------------------------------
+   224 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   225 ;; ---------------------------------------------------------------------------------
+   226 ;; (0) _main                                                 3     3      0       0
+   227 ;;                                              4 COMMON     3     3      0
+   228 ;; ---------------------------------------------------------------------------------
+   229 ;; Estimated maximum stack depth 0
+   230 ;; ---------------------------------------------------------------------------------
+   231 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   232 ;; ---------------------------------------------------------------------------------
+   233 ;; (1) _Interrupcao                                          4     4      0       0
+   234 ;;                                              0 COMMON     4     4      0
+   235 ;; ---------------------------------------------------------------------------------
+   236 ;; Estimated maximum stack depth 1
+   237 ;; ---------------------------------------------------------------------------------
+   238                           
+   239 ;; Call Graph Graphs:
+   240                           
+   241 ;; _main (ROOT)
+   242 ;;
+   243 ;; _Interrupcao (ROOT)
+   244 ;;
+   245                           
+   246 ;; Address spaces:
+   247                           
+   248 ;;Name               Size   Autos  Total    Cost      Usage
+   249 ;;BITCOMMON            E      0       0       0        0.0%
+   250 ;;EEDATA             100      0       0       0        0.0%
+   251 ;;NULL                 0      0       0       0        0.0%
+   252 ;;CODE                 0      0       0       0        0.0%
+   253 ;;COMMON               E      7       8       1       57.1%
+   254 ;;BITSFR0              0      0       0       1        0.0%
+   255 ;;SFR0                 0      0       0       1        0.0%
+   256 ;;BITSFR1              0      0       0       2        0.0%
+   257 ;;SFR1                 0      0       0       2        0.0%
+   258 ;;STACK                0      0       0       2        0.0%
+   259 ;;ABS                  0      0       8       3        0.0%
+   260 ;;BITBANK0            50      0       0       4        0.0%
+   261 ;;BITSFR3              0      0       0       4        0.0%
+   262 ;;SFR3                 0      0       0       4        0.0%
+   263 ;;BANK0               50      0       0       5        0.0%
+   264 ;;BITSFR2              0      0       0       5        0.0%
+   265 ;;SFR2                 0      0       0       5        0.0%
+   266 ;;BITBANK1            50      0       0       6        0.0%
+   267 ;;BANK1               50      0       0       7        0.0%
+   268 ;;BITBANK3            60      0       0       8        0.0%
+   269 ;;BANK3               60      0       0       9        0.0%
+   270 ;;BITBANK2            60      0       0      10        0.0%
+   271 ;;BANK2               60      0       0      11        0.0%
+   272 ;;DATA                 0      0       8      12        0.0%
+   273                           
+   274                           	global	_main
+   275                           psect	maintext,global,class=CODE,delta=2
+   276                           global __pmaintext
+   277  0015                     __pmaintext:
+   278                           
+   279 ;; *************** function _main *****************
+   280 ;; Defined at:
+   281 ;;		line 31 in file "C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\PWM\pwm.c"
+   282 ;; Parameters:    Size  Location     Type
+   283 ;;		None
+   284 ;; Auto vars:     Size  Location     Type
+   285 ;;		None
+   286 ;; Return value:  Size  Location     Type
+   287 ;;		None               void
+   288 ;; Registers used:
+   289 ;;		wreg, status,2
+   290 ;; Tracked objects:
+   291 ;;		On entry : 17F/0
+   292 ;;		On exit  : 0/0
+   293 ;;		Unchanged: 0/0
+   294 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   295 ;;      Params:         0       0       0       0       0
+   296 ;;      Locals:         0       0       0       0       0
+   297 ;;      Temps:          3       0       0       0       0
+   298 ;;      Totals:         3       0       0       0       0
+   299 ;;Total ram usage:        3 bytes
+   300 ;; Hardware stack levels required when called:    1
+   301 ;; This function calls:
+   302 ;;		Nothing
+   303 ;; This function is called by:
+   304 ;;		Startup code after reset
+   305 ;; This function uses a non-reentrant model
+   306 ;;
+   307                           psect	maintext
+   308                           	file	"C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\P
+                                 WM\pwm.c"
+   309                           	line	31
+   310                           	global	__size_of_main
+   311  0131                     	__size_of_main	equ	__end_of_main-_main
+   312                           	
+   313  0015                     _main:	
+   314                           	opt	stack 7
+   315                           ; Regs used in _main: [wreg+status,2]
+   316                           	line	32
+   317                           	
+   318  0015                     l2611:	
+   319                           # 32 "C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\PW
+                                 M\pwm.c"
+   320                           	psect config,class=CONFIG,delta=2 ;#
+   321                           # 32 "C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\PW
+                                 M\pwm.c"
+   322  2007  FF3A               	dw 0xFFFF & 0xFFFB & 0xFFBF & 0xFFFF & 0xFFFE & 0xFFFF & 0xFF7F & 0xFFFF ;#
+   323                           psect	maintext
+   324                           	line	34
+   325                           	
+   326  0015                     l2613:	
+   327                           ;pwm.c: 34: TRISB = 0b11111111;
+   328  0015  30FF               	movlw	(0FFh)
+   329  0016  1683               	bsf	status, 5	;RP0=1, select bank1
+   330  0017  1303               	bcf	status, 6	;RP1=0, select bank1
+   331  0018  0086               	movwf	(134)^080h	;volatile
+   332                           	line	35
+   333                           	
+   334  0019                     l2615:	
+   335                           ;pwm.c: 35: TRISB1 = 0;
+   336  0019  1086               	bcf	(1073/8)^080h,(1073)&7
+   337                           	line	36
+   338                           	
+   339  001A                     l2617:	
+   340                           ;pwm.c: 36: TRISB2 = 0;
+   341  001A  1106               	bcf	(1074/8)^080h,(1074)&7
+   342                           	line	37
+   343                           	
+   344  001B                     l2619:	
+   345                           ;pwm.c: 37: TRISB3 = 0;
+   346  001B  1186               	bcf	(1075/8)^080h,(1075)&7
+   347                           	line	39
+   348                           ;pwm.c: 39: TRISA = 0b001111;
+   349  001C  300F               	movlw	(0Fh)
+   350  001D  0085               	movwf	(133)^080h	;volatile
+   351                           	line	43
+   352                           	
+   353  001E                     l2621:	
+   354                           ;pwm.c: 43: CCP1X = 0;
+   355  001E  1283               	bcf	status, 5	;RP0=0, select bank0
+   356  001F  1303               	bcf	status, 6	;RP1=0, select bank0
+   357  0020  1297               	bcf	(189/8),(189)&7
+   358                           	line	44
+   359                           	
+   360  0021                     l2623:	
+   361                           ;pwm.c: 44: CCP1Y = 0;
+   362  0021  1217               	bcf	(188/8),(188)&7
+   363                           	line	45
+   364                           	
+   365  0022                     l2625:	
+   366                           ;pwm.c: 45: CCPR1L = 0;
+   367  0022  0195               	clrf	(21)	;volatile
+   368                           	line	46
+   369                           	
+   370  0023                     l2627:	
+   371                           ;pwm.c: 46: CCPR1H = 0;
+   372  0023  0196               	clrf	(22)	;volatile
+   373                           	line	49
+   374                           	
+   375  0024                     l2629:	
+   376                           ;pwm.c: 49: CCP1M3 = 1;
+   377  0024  1597               	bsf	(187/8),(187)&7
+   378                           	line	50
+   379                           	
+   380  0025                     l2631:	
+   381                           ;pwm.c: 50: CCP1M2 = 1;
+   382  0025  1517               	bsf	(186/8),(186)&7
+   383                           	line	51
+   384                           	
+   385  0026                     l2633:	
+   386                           ;pwm.c: 51: CCP1M1 = 1;
+   387  0026  1497               	bsf	(185/8),(185)&7
+   388                           	line	52
+   389                           	
+   390  0027                     l2635:	
+   391                           ;pwm.c: 52: CCP1M0 = 1;
+   392  0027  1417               	bsf	(184/8),(184)&7
+   393                           	line	54
+   394                           ;pwm.c: 54: PR2 = 255;
+   395  0028  30FF               	movlw	(0FFh)
+   396  0029  1683               	bsf	status, 5	;RP0=1, select bank1
+   397  002A  1303               	bcf	status, 6	;RP1=0, select bank1
+   398  002B  0092               	movwf	(146)^080h	;volatile
+   399                           	line	59
+   400                           	
+   401  002C                     l2637:	
+   402                           ;pwm.c: 59: TRISC2 = 0;
+   403  002C  1107               	bcf	(1082/8)^080h,(1082)&7
+   404                           	line	62
+   405                           	
+   406  002D                     l2639:	
+   407                           ;pwm.c: 62: TMR2 = 0;
+   408  002D  1283               	bcf	status, 5	;RP0=0, select bank0
+   409  002E  1303               	bcf	status, 6	;RP1=0, select bank0
+   410  002F  0191               	clrf	(17)	;volatile
+   411                           	line	63
+   412                           	
+   413  0030                     l2641:	
+   414                           ;pwm.c: 63: TOUTPS3 = 0;
+   415  0030  1312               	bcf	(150/8),(150)&7
+   416                           	line	64
+   417                           	
+   418  0031                     l2643:	
+   419                           ;pwm.c: 64: TOUTPS2 = 0;
+   420  0031  1292               	bcf	(149/8),(149)&7
+   421                           	line	65
+   422                           	
+   423  0032                     l2645:	
+   424                           ;pwm.c: 65: TOUTPS1 = 0;
+   425  0032  1212               	bcf	(148/8),(148)&7
+   426                           	line	66
+   427                           	
+   428  0033                     l2647:	
+   429                           ;pwm.c: 66: TOUTPS0 = 0;
+   430  0033  1192               	bcf	(147/8),(147)&7
+   431                           	line	68
+   432                           	
+   433  0034                     l2649:	
+   434                           ;pwm.c: 68: T2CKPS1 = 0;
+   435  0034  1092               	bcf	(145/8),(145)&7
+   436                           	line	69
+   437                           	
+   438  0035                     l2651:	
+   439                           ;pwm.c: 69: T2CKPS0 = 0;
+   440  0035  1012               	bcf	(144/8),(144)&7
+   441                           	line	71
+   442                           	
+   443  0036                     l2653:	
+   444                           ;pwm.c: 71: TMR2IF = 0;
+   445  0036  108C               	bcf	(97/8),(97)&7
+   446                           	line	72
+   447                           	
+   448  0037                     l2655:	
+   449                           ;pwm.c: 72: TMR2IE = 1;
+   450  0037  1683               	bsf	status, 5	;RP0=1, select bank1
+   451  0038  1303               	bcf	status, 6	;RP1=0, select bank1
+   452  0039  148C               	bsf	(1121/8)^080h,(1121)&7
+   453                           	line	73
+   454                           	
+   455  003A                     l2657:	
+   456                           ;pwm.c: 73: PEIE = 1;
+   457  003A  170B               	bsf	(94/8),(94)&7
+   458                           	line	74
+   459                           	
+   460  003B                     l2659:	
+   461                           ;pwm.c: 74: GIE = 1;
+   462  003B  178B               	bsf	(95/8),(95)&7
+   463                           	line	77
+   464                           	
+   465  003C                     l2661:	
+   466                           ;pwm.c: 77: RB1 = 1;
+   467  003C  1283               	bcf	status, 5	;RP0=0, select bank0
+   468  003D  1303               	bcf	status, 6	;RP1=0, select bank0
+   469  003E  1486               	bsf	(49/8),(49)&7
+   470                           	line	78
+   471                           	
+   472  003F                     l2663:	
+   473                           ;pwm.c: 78: _delay((unsigned long)((500)*(20000000/4000.0)));
+   474                           	opt asmopt_off
+   475  003F  300D               movlw  13
+   476  0040  00F6               movwf	((??_main+0)+0+2),f
+   477  0041  30AF               movlw	175
+   478  0042  00F5               movwf	((??_main+0)+0+1),f
+   479  0043  30C1               	movlw	193
+   480  0044  00F4               movwf	((??_main+0)+0),f
+   481  0045                     u2237:
+   482  0045  0BF4               	decfsz	((??_main+0)+0),f
+   483  0046  2845               	goto	u2237
+   484  0047  0BF5               	decfsz	((??_main+0)+0+1),f
+   485  0048  2845               	goto	u2237
+   486  0049  0BF6               	decfsz	((??_main+0)+0+2),f
+   487  004A  2845               	goto	u2237
+   488  004B  0064               	clrwdt
+   489                           opt asmopt_on
+   490                           
+   491                           	line	79
+   492                           	
+   493  004C                     l2665:	
+   494                           ;pwm.c: 79: RB1 = 0;
+   495  004C  1283               	bcf	status, 5	;RP0=0, select bank0
+   496  004D  1303               	bcf	status, 6	;RP1=0, select bank0
+   497  004E  1086               	bcf	(49/8),(49)&7
+   498                           	line	80
+   499                           	
+   500  004F                     l2667:	
+   501                           ;pwm.c: 80: _delay((unsigned long)((500)*(20000000/4000.0)));
+   502                           	opt asmopt_off
+   503  004F  300D               movlw  13
+   504  0050  00F6               movwf	((??_main+0)+0+2),f
+   505  0051  30AF               movlw	175
+   506  0052  00F5               movwf	((??_main+0)+0+1),f
+   507  0053  30C1               	movlw	193
+   508  0054  00F4               movwf	((??_main+0)+0),f
+   509  0055                     u2247:
+   510  0055  0BF4               	decfsz	((??_main+0)+0),f
+   511  0056  2855               	goto	u2247
+   512  0057  0BF5               	decfsz	((??_main+0)+0+1),f
+   513  0058  2855               	goto	u2247
+   514  0059  0BF6               	decfsz	((??_main+0)+0+2),f
+   515  005A  2855               	goto	u2247
+   516  005B  0064               	clrwdt
+   517                           opt asmopt_on
+   518                           
+   519                           	line	81
+   520                           	
+   521  005C                     l2669:	
+   522                           ;pwm.c: 81: RB1 = 1;
+   523  005C  1283               	bcf	status, 5	;RP0=0, select bank0
+   524  005D  1303               	bcf	status, 6	;RP1=0, select bank0
+   525  005E  1486               	bsf	(49/8),(49)&7
+   526                           	line	82
+   527                           	
+   528  005F                     l2671:	
+   529                           ;pwm.c: 82: _delay((unsigned long)((500)*(20000000/4000.0)));
+   530                           	opt asmopt_off
+   531  005F  300D               movlw  13
+   532  0060  00F6               movwf	((??_main+0)+0+2),f
+   533  0061  30AF               movlw	175
+   534  0062  00F5               movwf	((??_main+0)+0+1),f
+   535  0063  30C1               	movlw	193
+   536  0064  00F4               movwf	((??_main+0)+0),f
+   537  0065                     u2257:
+   538  0065  0BF4               	decfsz	((??_main+0)+0),f
+   539  0066  2865               	goto	u2257
+   540  0067  0BF5               	decfsz	((??_main+0)+0+1),f
+   541  0068  2865               	goto	u2257
+   542  0069  0BF6               	decfsz	((??_main+0)+0+2),f
+   543  006A  2865               	goto	u2257
+   544  006B  0064               	clrwdt
+   545                           opt asmopt_on
+   546                           
+   547                           	line	83
+   548                           	
+   549  006C                     l2673:	
+   550                           ;pwm.c: 83: RB1 = 0;
+   551  006C  1283               	bcf	status, 5	;RP0=0, select bank0
+   552  006D  1303               	bcf	status, 6	;RP1=0, select bank0
+   553  006E  1086               	bcf	(49/8),(49)&7
+   554                           	line	84
+   555                           	
+   556  006F                     l2675:	
+   557                           ;pwm.c: 84: _delay((unsigned long)((500)*(20000000/4000.0)));
+   558                           	opt asmopt_off
+   559  006F  300D               movlw  13
+   560  0070  00F6               movwf	((??_main+0)+0+2),f
+   561  0071  30AF               movlw	175
+   562  0072  00F5               movwf	((??_main+0)+0+1),f
+   563  0073  30C1               	movlw	193
+   564  0074  00F4               movwf	((??_main+0)+0),f
+   565  0075                     u2267:
+   566  0075  0BF4               	decfsz	((??_main+0)+0),f
+   567  0076  2875               	goto	u2267
+   568  0077  0BF5               	decfsz	((??_main+0)+0+1),f
+   569  0078  2875               	goto	u2267
+   570  0079  0BF6               	decfsz	((??_main+0)+0+2),f
+   571  007A  2875               	goto	u2267
+   572  007B  0064               	clrwdt
+   573                           opt asmopt_on
+   574                           
+   575                           	line	86
+   576                           	
+   577  007C                     l2677:	
+   578                           ;pwm.c: 86: RB2 = 1;
+   579  007C  1283               	bcf	status, 5	;RP0=0, select bank0
+   580  007D  1303               	bcf	status, 6	;RP1=0, select bank0
+   581  007E  1506               	bsf	(50/8),(50)&7
+   582                           	line	87
+   583                           	
+   584  007F                     l2679:	
+   585                           ;pwm.c: 87: _delay((unsigned long)((500)*(20000000/4000.0)));
+   586                           	opt asmopt_off
+   587  007F  300D               movlw  13
+   588  0080  00F6               movwf	((??_main+0)+0+2),f
+   589  0081  30AF               movlw	175
+   590  0082  00F5               movwf	((??_main+0)+0+1),f
+   591  0083  30C1               	movlw	193
+   592  0084  00F4               movwf	((??_main+0)+0),f
+   593  0085                     u2277:
+   594  0085  0BF4               	decfsz	((??_main+0)+0),f
+   595  0086  2885               	goto	u2277
+   596  0087  0BF5               	decfsz	((??_main+0)+0+1),f
+   597  0088  2885               	goto	u2277
+   598  0089  0BF6               	decfsz	((??_main+0)+0+2),f
+   599  008A  2885               	goto	u2277
+   600  008B  0064               	clrwdt
+   601                           opt asmopt_on
+   602                           
+   603                           	line	88
+   604                           	
+   605  008C                     l2681:	
+   606                           ;pwm.c: 88: RB2 = 0;
+   607  008C  1283               	bcf	status, 5	;RP0=0, select bank0
+   608  008D  1303               	bcf	status, 6	;RP1=0, select bank0
+   609  008E  1106               	bcf	(50/8),(50)&7
+   610                           	line	89
+   611                           	
+   612  008F                     l2683:	
+   613                           ;pwm.c: 89: _delay((unsigned long)((500)*(20000000/4000.0)));
+   614                           	opt asmopt_off
+   615  008F  300D               movlw  13
+   616  0090  00F6               movwf	((??_main+0)+0+2),f
+   617  0091  30AF               movlw	175
+   618  0092  00F5               movwf	((??_main+0)+0+1),f
+   619  0093  30C1               	movlw	193
+   620  0094  00F4               movwf	((??_main+0)+0),f
+   621  0095                     u2287:
+   622  0095  0BF4               	decfsz	((??_main+0)+0),f
+   623  0096  2895               	goto	u2287
+   624  0097  0BF5               	decfsz	((??_main+0)+0+1),f
+   625  0098  2895               	goto	u2287
+   626  0099  0BF6               	decfsz	((??_main+0)+0+2),f
+   627  009A  2895               	goto	u2287
+   628  009B  0064               	clrwdt
+   629                           opt asmopt_on
+   630                           
+   631                           	line	90
+   632                           	
+   633  009C                     l2685:	
+   634                           ;pwm.c: 90: RB2 = 1;
+   635  009C  1283               	bcf	status, 5	;RP0=0, select bank0
+   636  009D  1303               	bcf	status, 6	;RP1=0, select bank0
+   637  009E  1506               	bsf	(50/8),(50)&7
+   638                           	line	91
+   639                           	
+   640  009F                     l2687:	
+   641                           ;pwm.c: 91: _delay((unsigned long)((500)*(20000000/4000.0)));
+   642                           	opt asmopt_off
+   643  009F  300D               movlw  13
+   644  00A0  00F6               movwf	((??_main+0)+0+2),f
+   645  00A1  30AF               movlw	175
+   646  00A2  00F5               movwf	((??_main+0)+0+1),f
+   647  00A3  30C1               	movlw	193
+   648  00A4  00F4               movwf	((??_main+0)+0),f
+   649  00A5                     u2297:
+   650  00A5  0BF4               	decfsz	((??_main+0)+0),f
+   651  00A6  28A5               	goto	u2297
+   652  00A7  0BF5               	decfsz	((??_main+0)+0+1),f
+   653  00A8  28A5               	goto	u2297
+   654  00A9  0BF6               	decfsz	((??_main+0)+0+2),f
+   655  00AA  28A5               	goto	u2297
+   656  00AB  0064               	clrwdt
+   657                           opt asmopt_on
+   658                           
+   659                           	line	92
+   660                           	
+   661  00AC                     l2689:	
+   662                           ;pwm.c: 92: RB2 = 0;
+   663  00AC  1283               	bcf	status, 5	;RP0=0, select bank0
+   664  00AD  1303               	bcf	status, 6	;RP1=0, select bank0
+   665  00AE  1106               	bcf	(50/8),(50)&7
+   666                           	line	93
+   667                           	
+   668  00AF                     l2691:	
+   669                           ;pwm.c: 93: _delay((unsigned long)((500)*(20000000/4000.0)));
+   670                           	opt asmopt_off
+   671  00AF  300D               movlw  13
+   672  00B0  00F6               movwf	((??_main+0)+0+2),f
+   673  00B1  30AF               movlw	175
+   674  00B2  00F5               movwf	((??_main+0)+0+1),f
+   675  00B3  30C1               	movlw	193
+   676  00B4  00F4               movwf	((??_main+0)+0),f
+   677  00B5                     u2307:
+   678  00B5  0BF4               	decfsz	((??_main+0)+0),f
+   679  00B6  28B5               	goto	u2307
+   680  00B7  0BF5               	decfsz	((??_main+0)+0+1),f
+   681  00B8  28B5               	goto	u2307
+   682  00B9  0BF6               	decfsz	((??_main+0)+0+2),f
+   683  00BA  28B5               	goto	u2307
+   684  00BB  0064               	clrwdt
+   685                           opt asmopt_on
+   686                           
+   687                           	line	96
+   688                           	
+   689  00BC                     l2693:	
+   690                           ;pwm.c: 96: RB3 = 1;
+   691  00BC  1283               	bcf	status, 5	;RP0=0, select bank0
+   692  00BD  1303               	bcf	status, 6	;RP1=0, select bank0
+   693  00BE  1586               	bsf	(51/8),(51)&7
+   694                           	line	97
+   695                           	
+   696  00BF                     l2695:	
+   697                           ;pwm.c: 97: _delay((unsigned long)((500)*(20000000/4000.0)));
+   698                           	opt asmopt_off
+   699  00BF  300D               movlw  13
+   700  00C0  00F6               movwf	((??_main+0)+0+2),f
+   701  00C1  30AF               movlw	175
+   702  00C2  00F5               movwf	((??_main+0)+0+1),f
+   703  00C3  30C1               	movlw	193
+   704  00C4  00F4               movwf	((??_main+0)+0),f
+   705  00C5                     u2317:
+   706  00C5  0BF4               	decfsz	((??_main+0)+0),f
+   707  00C6  28C5               	goto	u2317
+   708  00C7  0BF5               	decfsz	((??_main+0)+0+1),f
+   709  00C8  28C5               	goto	u2317
+   710  00C9  0BF6               	decfsz	((??_main+0)+0+2),f
+   711  00CA  28C5               	goto	u2317
+   712  00CB  0064               	clrwdt
+   713                           opt asmopt_on
+   714                           
+   715                           	line	98
+   716                           	
+   717  00CC                     l2697:	
+   718                           ;pwm.c: 98: RB3 = 0;
+   719  00CC  1283               	bcf	status, 5	;RP0=0, select bank0
+   720  00CD  1303               	bcf	status, 6	;RP1=0, select bank0
+   721  00CE  1186               	bcf	(51/8),(51)&7
+   722                           	line	99
+   723                           	
+   724  00CF                     l2699:	
+   725                           ;pwm.c: 99: _delay((unsigned long)((500)*(20000000/4000.0)));
+   726                           	opt asmopt_off
+   727  00CF  300D               movlw  13
+   728  00D0  00F6               movwf	((??_main+0)+0+2),f
+   729  00D1  30AF               movlw	175
+   730  00D2  00F5               movwf	((??_main+0)+0+1),f
+   731  00D3  30C1               	movlw	193
+   732  00D4  00F4               movwf	((??_main+0)+0),f
+   733  00D5                     u2327:
+   734  00D5  0BF4               	decfsz	((??_main+0)+0),f
+   735  00D6  28D5               	goto	u2327
+   736  00D7  0BF5               	decfsz	((??_main+0)+0+1),f
+   737  00D8  28D5               	goto	u2327
+   738  00D9  0BF6               	decfsz	((??_main+0)+0+2),f
+   739  00DA  28D5               	goto	u2327
+   740  00DB  0064               	clrwdt
+   741                           opt asmopt_on
+   742                           
+   743                           	line	101
+   744                           	
+   745  00DC                     l2701:	
+   746                           ;pwm.c: 101: TMR2ON = 1;
+   747  00DC  1283               	bcf	status, 5	;RP0=0, select bank0
+   748  00DD  1303               	bcf	status, 6	;RP1=0, select bank0
+   749  00DE  1512               	bsf	(146/8),(146)&7
+   750  00DF  28E0               	goto	l2703
+   751                           	line	103
+   752                           ;pwm.c: 103: while(1)
+   753                           	
+   754  00E0                     l693:	
+   755                           	line	106
+   756                           	
+   757  00E0                     l2703:	
+   758                           ;pwm.c: 104: {
+   759                           ;pwm.c: 106: RB1 = 1;
+   760  00E0  1283               	bcf	status, 5	;RP0=0, select bank0
+   761  00E1  1303               	bcf	status, 6	;RP1=0, select bank0
+   762  00E2  1486               	bsf	(49/8),(49)&7
+   763                           	line	107
+   764                           	
+   765  00E3                     l2705:	
+   766                           ;pwm.c: 107: duty = 0;
+   767  00E3  01F7               	clrf	(_duty)
+   768                           	line	108
+   769                           	
+   770  00E4                     l2707:	
+   771                           ;pwm.c: 108: _delay((unsigned long)((200)*(20000000/4000.0)));
+   772                           	opt asmopt_off
+   773  00E4  3006               movlw  6
+   774  00E5  00F6               movwf	((??_main+0)+0+2),f
+   775  00E6  3013               movlw	19
+   776  00E7  00F5               movwf	((??_main+0)+0+1),f
+   777  00E8  30B1               	movlw	177
+   778  00E9  00F4               movwf	((??_main+0)+0),f
+   779  00EA                     u2337:
+   780  00EA  0BF4               	decfsz	((??_main+0)+0),f
+   781  00EB  28EA               	goto	u2337
+   782  00EC  0BF5               	decfsz	((??_main+0)+0+1),f
+   783  00ED  28EA               	goto	u2337
+   784  00EE  0BF6               	decfsz	((??_main+0)+0+2),f
+   785  00EF  28EA               	goto	u2337
+   786  00F0  28F1               	nop2
+   787                           opt asmopt_on
+   788                           
+   789                           	line	110
+   790                           	
+   791  00F1                     l2709:	
+   792                           ;pwm.c: 110: RB1 = 0;
+   793  00F1  1283               	bcf	status, 5	;RP0=0, select bank0
+   794  00F2  1303               	bcf	status, 6	;RP1=0, select bank0
+   795  00F3  1086               	bcf	(49/8),(49)&7
+   796                           	line	111
+   797                           	
+   798  00F4                     l2711:	
+   799                           ;pwm.c: 111: duty = 63;
+   800  00F4  303F               	movlw	(03Fh)
+   801  00F5  00F4               	movwf	(??_main+0)+0
+   802  00F6  0874               	movf	(??_main+0)+0,w
+   803  00F7  00F7               	movwf	(_duty)
+   804                           	line	112
+   805                           	
+   806  00F8                     l2713:	
+   807                           ;pwm.c: 112: _delay((unsigned long)((200)*(20000000/4000.0)));
+   808                           	opt asmopt_off
+   809  00F8  3006               movlw  6
+   810  00F9  00F6               movwf	((??_main+0)+0+2),f
+   811  00FA  3013               movlw	19
+   812  00FB  00F5               movwf	((??_main+0)+0+1),f
+   813  00FC  30B1               	movlw	177
+   814  00FD  00F4               movwf	((??_main+0)+0),f
+   815  00FE                     u2347:
+   816  00FE  0BF4               	decfsz	((??_main+0)+0),f
+   817  00FF  28FE               	goto	u2347
+   818  0100  0BF5               	decfsz	((??_main+0)+0+1),f
+   819  0101  28FE               	goto	u2347
+   820  0102  0BF6               	decfsz	((??_main+0)+0+2),f
+   821  0103  28FE               	goto	u2347
+   822  0104  2905               	nop2
+   823                           opt asmopt_on
+   824                           
+   825                           	line	114
+   826                           	
+   827  0105                     l2715:	
+   828                           ;pwm.c: 114: RB1 = 1;
+   829  0105  1283               	bcf	status, 5	;RP0=0, select bank0
+   830  0106  1303               	bcf	status, 6	;RP1=0, select bank0
+   831  0107  1486               	bsf	(49/8),(49)&7
+   832                           	line	115
+   833                           	
+   834  0108                     l2717:	
+   835                           ;pwm.c: 115: duty = 127;
+   836  0108  307F               	movlw	(07Fh)
+   837  0109  00F4               	movwf	(??_main+0)+0
+   838  010A  0874               	movf	(??_main+0)+0,w
+   839  010B  00F7               	movwf	(_duty)
+   840                           	line	116
+   841                           	
+   842  010C                     l2719:	
+   843                           ;pwm.c: 116: _delay((unsigned long)((200)*(20000000/4000.0)));
+   844                           	opt asmopt_off
+   845  010C  3006               movlw  6
+   846  010D  00F6               movwf	((??_main+0)+0+2),f
+   847  010E  3013               movlw	19
+   848  010F  00F5               movwf	((??_main+0)+0+1),f
+   849  0110  30B1               	movlw	177
+   850  0111  00F4               movwf	((??_main+0)+0),f
+   851  0112                     u2357:
+   852  0112  0BF4               	decfsz	((??_main+0)+0),f
+   853  0113  2912               	goto	u2357
+   854  0114  0BF5               	decfsz	((??_main+0)+0+1),f
+   855  0115  2912               	goto	u2357
+   856  0116  0BF6               	decfsz	((??_main+0)+0+2),f
+   857  0117  2912               	goto	u2357
+   858  0118  2919               	nop2
+   859                           opt asmopt_on
+   860                           
+   861                           	line	118
+   862                           	
+   863  0119                     l2721:	
+   864                           ;pwm.c: 118: RB1 = 0;
+   865  0119  1283               	bcf	status, 5	;RP0=0, select bank0
+   866  011A  1303               	bcf	status, 6	;RP1=0, select bank0
+   867  011B  1086               	bcf	(49/8),(49)&7
+   868                           	line	119
+   869                           	
+   870  011C                     l2723:	
+   871                           ;pwm.c: 119: duty = 190;
+   872  011C  30BE               	movlw	(0BEh)
+   873  011D  00F4               	movwf	(??_main+0)+0
+   874  011E  0874               	movf	(??_main+0)+0,w
+   875  011F  00F7               	movwf	(_duty)
+   876                           	line	120
+   877                           	
+   878  0120                     l2725:	
+   879                           ;pwm.c: 120: _delay((unsigned long)((200)*(20000000/4000.0)));
+   880                           	opt asmopt_off
+   881  0120  3006               movlw  6
+   882  0121  00F6               movwf	((??_main+0)+0+2),f
+   883  0122  3013               movlw	19
+   884  0123  00F5               movwf	((??_main+0)+0+1),f
+   885  0124  30B1               	movlw	177
+   886  0125  00F4               movwf	((??_main+0)+0),f
+   887  0126                     u2367:
+   888  0126  0BF4               	decfsz	((??_main+0)+0),f
+   889  0127  2926               	goto	u2367
+   890  0128  0BF5               	decfsz	((??_main+0)+0+1),f
+   891  0129  2926               	goto	u2367
+   892  012A  0BF6               	decfsz	((??_main+0)+0+2),f
+   893  012B  2926               	goto	u2367
+   894  012C  292D               	nop2
+   895                           opt asmopt_on
+   896                           
+   897                           	line	122
+   898                           	
+   899  012D                     l2727:	
+   900                           ;pwm.c: 122: RB1 = 1;
+   901  012D  1283               	bcf	status, 5	;RP0=0, select bank0
+   902  012E  1303               	bcf	status, 6	;RP1=0, select bank0
+   903  012F  1486               	bsf	(49/8),(49)&7
+   904                           	line	123
+   905                           	
+   906  0130                     l2729:	
+   907                           ;pwm.c: 123: duty = 255;
+   908  0130  30FF               	movlw	(0FFh)
+   909  0131  00F4               	movwf	(??_main+0)+0
+   910  0132  0874               	movf	(??_main+0)+0,w
+   911  0133  00F7               	movwf	(_duty)
+   912                           	line	124
+   913                           	
+   914  0134                     l2731:	
+   915                           ;pwm.c: 124: _delay((unsigned long)((200)*(20000000/4000.0)));
+   916                           	opt asmopt_off
+   917  0134  3006               movlw  6
+   918  0135  00F6               movwf	((??_main+0)+0+2),f
+   919  0136  3013               movlw	19
+   920  0137  00F5               movwf	((??_main+0)+0+1),f
+   921  0138  30B1               	movlw	177
+   922  0139  00F4               movwf	((??_main+0)+0),f
+   923  013A                     u2377:
+   924  013A  0BF4               	decfsz	((??_main+0)+0),f
+   925  013B  293A               	goto	u2377
+   926  013C  0BF5               	decfsz	((??_main+0)+0+1),f
+   927  013D  293A               	goto	u2377
+   928  013E  0BF6               	decfsz	((??_main+0)+0+2),f
+   929  013F  293A               	goto	u2377
+   930  0140  2941               	nop2
+   931                           opt asmopt_on
+   932                           
+   933  0141  28E0               	goto	l2703
+   934                           	line	126
+   935                           	
+   936  0142                     l694:	
+   937                           	line	103
+   938  0142  28E0               	goto	l2703
+   939                           	
+   940  0143                     l695:	
+   941                           	line	128
+   942                           	
+   943  0143                     l696:	
+   944                           	global	start
+   945  0143  120A  118A  2812   	ljmp	start
+   946                           	opt stack 0
+   947                           GLOBAL	__end_of_main
+   948  0146                     	__end_of_main:
+   949 ;; =============== function _main ends ============
+   950                           
+   951                           	signat	_main,88
+   952                           	global	_Interrupcao
+   953                           psect	text77,local,class=CODE,delta=2
+   954                           global __ptext77
+   955  0146                     __ptext77:
+   956                           
+   957 ;; *************** function _Interrupcao *****************
+   958 ;; Defined at:
+   959 ;;		line 17 in file "C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\PWM\pwm.c"
+   960 ;; Parameters:    Size  Location     Type
+   961 ;;		None
+   962 ;; Auto vars:     Size  Location     Type
+   963 ;;		None
+   964 ;; Return value:  Size  Location     Type
+   965 ;;		None               void
+   966 ;; Registers used:
+   967 ;;		wreg
+   968 ;; Tracked objects:
+   969 ;;		On entry : 0/0
+   970 ;;		On exit  : 0/0
+   971 ;;		Unchanged: 0/0
+   972 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   973 ;;      Params:         0       0       0       0       0
+   974 ;;      Locals:         0       0       0       0       0
+   975 ;;      Temps:          4       0       0       0       0
+   976 ;;      Totals:         4       0       0       0       0
+   977 ;;Total ram usage:        4 bytes
+   978 ;; Hardware stack levels used:    1
+   979 ;; This function calls:
+   980 ;;		Nothing
+   981 ;; This function is called by:
+   982 ;;		Interrupt level 1
+   983 ;; This function uses a non-reentrant model
+   984 ;;
+   985                           psect	text77
+   986                           	file	"C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\P
+                                 WM\pwm.c"
+   987                           	line	17
+   988                           	global	__size_of_Interrupcao
+   989  001A                     	__size_of_Interrupcao	equ	__end_of_Interrupcao-_Interrupcao
+   990                           	
+   991  0146                     _Interrupcao:	
+   992                           	opt	stack 7
+   993                           ; Regs used in _Interrupcao: [wreg]
+   994                           psect	intentry,class=CODE,delta=2
+   995                           global __pintentry
+   996  0004                     __pintentry:
+   997                           global interrupt_function
+   998  0004                     interrupt_function:
+   999                           	global saved_w
+  1000  007E                     	saved_w	set	btemp+0
+  1001  0004  00FE               	movwf	saved_w
+  1002  0005  0E03               	swapf	status,w
+  1003  0006  00F0               	movwf	(??_Interrupcao+0)
+  1004  0007  0804               	movf	fsr0,w
+  1005  0008  00F1               	movwf	(??_Interrupcao+1)
+  1006  0009  080A               	movf	pclath,w
+  1007  000A  00F2               	movwf	(??_Interrupcao+2)
+  1008  000B  1283               	bcf	status, 5	;RP0=0, select bank0
+  1009  000C  1303               	bcf	status, 6	;RP1=0, select bank0
+  1010  000D  087F               	movf	btemp+1,w
+  1011  000E  00F3               	movwf	(??_Interrupcao+3)
+  1012  000F  120A  118A  2946   	ljmp	_Interrupcao
+  1013                           psect	text77
+  1014                           	line	19
+  1015                           	
+  1016  0146                     i1l1743:	
+  1017                           ;pwm.c: 19: if(TMR2IE)
+  1018  0146  1683               	bsf	status, 5	;RP0=1, select bank1
+  1019  0147  1303               	bcf	status, 6	;RP1=0, select bank1
+  1020  0148  1C8C               	btfss	(1121/8)^080h,(1121)&7
+  1021  0149  294B               	goto	u1_21
+  1022  014A  294C               	goto	u1_20
+  1023  014B                     u1_21:
+  1024  014B  2954               	goto	i1l690
+  1025  014C                     u1_20:
+  1026                           	line	21
+  1027                           	
+  1028  014C                     i1l1745:	
+  1029                           ;pwm.c: 20: {
+  1030                           ;pwm.c: 21: CCPR1L = duty;
+  1031  014C  0877               	movf	(_duty),w
+  1032  014D  1283               	bcf	status, 5	;RP0=0, select bank0
+  1033  014E  1303               	bcf	status, 6	;RP1=0, select bank0
+  1034  014F  0095               	movwf	(21)	;volatile
+  1035                           	line	22
+  1036                           	
+  1037  0150                     i1l1747:	
+  1038                           ;pwm.c: 22: CCP1X = 0b0;
+  1039  0150  1297               	bcf	(189/8),(189)&7
+  1040                           	line	23
+  1041                           	
+  1042  0151                     i1l1749:	
+  1043                           ;pwm.c: 23: CCP1Y = 0b0;
+  1044  0151  1217               	bcf	(188/8),(188)&7
+  1045                           	line	25
+  1046                           	
+  1047  0152                     i1l1751:	
+  1048                           ;pwm.c: 25: TMR2IF = 0;
+  1049  0152  108C               	bcf	(97/8),(97)&7
+  1050  0153  2954               	goto	i1l690
+  1051                           	line	26
+  1052                           	
+  1053  0154                     i1l689:	
+  1054                           	line	28
+  1055                           	
+  1056  0154                     i1l690:	
+  1057  0154  0873               	movf	(??_Interrupcao+3),w
+  1058  0155  1283               	bcf	status, 5	;RP0=0, select bank0
+  1059  0156  00FF               	movwf	btemp+1
+  1060  0157  0872               	movf	(??_Interrupcao+2),w
+  1061  0158  008A               	movwf	pclath
+  1062  0159  0871               	movf	(??_Interrupcao+1),w
+  1063  015A  0084               	movwf	fsr0
+  1064  015B  0E70               	swapf	(??_Interrupcao+0)^0FFFFFF80h,w
+  1065  015C  0083               	movwf	status
+  1066  015D  0EFE               	swapf	saved_w,f
+  1067  015E  0E7E               	swapf	saved_w,w
+  1068  015F  0009               	retfie
+  1069                           	opt stack 0
+  1070                           GLOBAL	__end_of_Interrupcao
+  1071  0160                     	__end_of_Interrupcao:
+  1072 ;; =============== function _Interrupcao ends ============
+  1073                           
+  1074                           	signat	_Interrupcao,88
+  1075                           psect	text78,local,class=CODE,delta=2
+  1076                           global __ptext78
+  1077  0000                     __ptext78:
+  1078                           	global	btemp
+  1079  007E                     	btemp set 07Eh
+  1080                           
+  1081                           	DABS	1,126,2	;btemp
+  1082                           	global	wtemp0
+  1083  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.83 build 10920 
+Symbol Table                                                                                   Wed Nov 06 21:45:19 2013
+
+                  _RD 0C60                    _WR 0C61                   l693 00E0                   l694 0142  
+                 l695 0143                   l696 0143                   _GIE 005F                   _RB1 0031  
+                 _RB2 0032                   _RB3 0033                   _PR2 0092                   fsr0 0004  
+                l2611 0015                  l2701 00DC                  l2621 001E                  l2613 0015  
+                l2711 00F4                  l2703 00E0                  l2631 0025                  l2623 0021  
+                l2615 0019                  l2721 0119                  l2713 00F8                  l2705 00E3  
+                l2641 0030                  l2633 0026                  l2625 0022                  l2617 001A  
+                l2731 0134                  l2723 011C                  l2715 0105                  l2707 00E4  
+                l2651 0035                  l2643 0031                  l2635 0027                  l2627 0023  
+                l2619 001B                  l2725 0120                  l2717 0108                  l2709 00F1  
+                l2661 003C                  l2653 0036                  l2645 0032                  l2637 002C  
+                l2629 0024                  l2727 012D                  l2719 010C                  l2671 005F  
+                l2663 003F                  l2655 0037                  l2647 0033                  l2639 002D  
+                l2729 0130                  l2681 008C                  l2673 006C                  l2665 004C  
+                l2657 003A                  l2649 0034                  l2691 00AF                  l2683 008F  
+                l2675 006F                  l2667 004F                  l2659 003B                  l2693 00BC  
+                l2685 009C                  l2677 007C                  l2669 005C                  l2695 00BF  
+                l2687 009F                  l2679 007F                  l2697 00CC                  l2689 00AC  
+                l2699 00CF                  u2307 00B5                  u2317 00C5                  u2237 0045  
+                u2327 00D5                  u2247 0055                  u2337 00EA                  u2257 0065  
+                u2347 00FE                  u2267 0075                  u2357 0112                  u2277 0085  
+                u2367 0126                  u2287 0095                  u2377 013A                  u2297 00A5  
+                _PEIE 005E                  _TMR2 0011                  _WREN 0C62                  u1_20 014C  
+                u1_21 014B                  _main 0015                  _duty 0077                  btemp 007E  
+                start 0012                 ?_main 0070                 _CCP1X 00BD                 _CCP1Y 00BC  
+               _EEADR 010D                 _CARRY 0018                 i1l690 0154                 i1l689 0154  
+               _TRISA 0085                 _TRISB 0086                 pclath 000A                 status 0003  
+               wtemp0 007E         ??_Interrupcao 0070          __end_of_main 0146                ??_main 0074  
+              _CCP1M0 00B8                _CCP1M1 00B9                _CCP1M2 00BA                _CCP1M3 00BB  
+              _EEDATA 010C                _CCPR1H 0016                _CCPR1L 0015                _EECON1 018C  
+              _EECON2 018D                i1l1751 0152                i1l1743 0146                i1l1745 014C  
+              i1l1747 0150                i1l1749 0151                _TMR2IE 0461                _TMR2IF 0061  
+              _TMR2ON 0092                _TRISB1 0431                _TRISB2 0432                _TRISB3 0433  
+              _TRISC2 043A   __end_of_Interrupcao 0160                saved_w 007E        __pcstackCOMMON 0070  
+         _Interrupcao 0146            __pmaintext 0015            __pintentry 0004               _T2CKPS0 0090  
+             _T2CKPS1 0091               _TOUTPS0 0093               _TOUTPS1 0094               _TOUTPS2 0095  
+             _TOUTPS3 0096  end_of_initialization 0161   start_initialization 0160          ?_Interrupcao 0070  
+         __pbssCOMMON 0077     interrupt_function 0004  __size_of_Interrupcao 001A              __ptext76 0000  
+            __ptext77 0146              __ptext78 0000         __size_of_main 0131              intlevel1 0000  

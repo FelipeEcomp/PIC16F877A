@@ -1,0 +1,771 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.83 build 10920 
+                                                                                               Fri Oct 11 19:04:55 2013
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 10920"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F877A
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNROOT	_main
+    43                           	FNCALL	intlevel1,_interupt
+    44                           	global	intlevel1
+    45                           	FNROOT	intlevel1
+    46                           	global	_count
+    47                           	global	_flag
+    48                           	global	_CARRY
+    49                           psect	maintext,global,class=CODE,delta=2
+    50                           global __pmaintext
+    51  0015                     __pmaintext:
+    52  0018                     _CARRY	set	24
+    53                           	global	_GIE
+    54  005F                     _GIE	set	95
+    55                           	global	_PEIE
+    56  005E                     _PEIE	set	94
+    57                           	global	_RB1
+    58  0031                     _RB1	set	49
+    59                           	global	_RB3
+    60  0033                     _RB3	set	51
+    61                           	global	_TMR0IE
+    62  005D                     _TMR0IE	set	93
+    63                           	global	_TMR0IF
+    64  005A                     _TMR0IF	set	90
+    65                           	global	_TRISB
+    66  0086                     _TRISB	set	134
+    67                           	global	_PS0
+    68  0408                     _PS0	set	1032
+    69                           	global	_PS1
+    70  0409                     _PS1	set	1033
+    71                           	global	_PS2
+    72  040A                     _PS2	set	1034
+    73                           	global	_PSA
+    74  040B                     _PSA	set	1035
+    75                           	global	_T0CS
+    76  040D                     _T0CS	set	1037
+    77                           	global	_T0SE
+    78  040C                     _T0SE	set	1036
+    79                           	global	_TRISA0
+    80  0428                     _TRISA0	set	1064
+    81                           	global	_TRISB1
+    82  0431                     _TRISB1	set	1073
+    83                           	global	_TRISB2
+    84  0432                     _TRISB2	set	1074
+    85                           	global	_TRISB3
+    86  0433                     _TRISB3	set	1075
+    87                           	global	_EEADR
+    88  010D                     _EEADR	set	269
+    89                           	global	_EEDATA
+    90  010C                     _EEDATA	set	268
+    91                           	global	_EECON1
+    92  018C                     _EECON1	set	396
+    93                           	global	_EECON2
+    94  018D                     _EECON2	set	397
+    95                           	global	_RD
+    96  0C60                     _RD	set	3168
+    97                           	global	_WR
+    98  0C61                     _WR	set	3169
+    99                           	global	_WREN
+   100  0C62                     _WREN	set	3170
+   101                           	file	"temporizador.as"
+   102                           	line	#
+   103                           psect cinit,class=CODE,delta=2
+   104                           global start_initialization
+   105  00B6                     start_initialization:
+   106                           
+   107                           psect	bitbssCOMMON,class=COMMON,bit,space=1
+   108                           global __pbitbssCOMMON
+   109  03C0                     __pbitbssCOMMON:
+   110  03C0                     _flag:
+   111  03C0                            ds      1
+   112                           
+   113                           psect	bssCOMMON,class=COMMON,space=1
+   114                           global __pbssCOMMON
+   115  0079                     __pbssCOMMON:
+   116  0079                     _count:
+   117  0079                            ds      1
+   118                           
+   119                           ; Clear objects allocated to BITCOMMON
+   120                           psect cinit,class=CODE,delta=2
+   121  00B6  01F8               	clrf	((__pbitbssCOMMON/8)+0)&07Fh
+   122                           ; Clear objects allocated to COMMON
+   123                           psect cinit,class=CODE,delta=2
+   124  00B7  01F9               	clrf	((__pbssCOMMON)+0)&07Fh
+   125                           psect cinit,class=CODE,delta=2
+   126                           global end_of_initialization
+   127                           
+   128                           ;End of C runtime variable initialization code
+   129                           
+   130  00B8                     end_of_initialization:
+   131  00B8  0183               clrf status
+   132  00B9  120A  118A  2815   ljmp _main	;jump to C main() function
+   133                           psect	cstackCOMMON,class=COMMON,space=1
+   134                           global __pcstackCOMMON
+   135  0070                     __pcstackCOMMON:
+   136                           	global	?_interupt
+   137  0070                     ?_interupt:	; 0 bytes @ 0x0
+   138                           	global	??_interupt
+   139  0070                     ??_interupt:	; 0 bytes @ 0x0
+   140                           	global	?_main
+   141  0070                     ?_main:	; 0 bytes @ 0x0
+   142  0070                     	ds	5
+   143                           	global	??_main
+   144  0075                     ??_main:	; 0 bytes @ 0x5
+   145  0075                     	ds	3
+   146 ;;Data sizes: Strings 0, constant 0, data 0, bss 1, persistent 0 stack 0
+   147 ;;Auto spaces:   Size  Autos    Used
+   148 ;; COMMON          14      8      10
+   149 ;; BANK0           80      0       0
+   150 ;; BANK1           80      0       0
+   151 ;; BANK3           96      0       0
+   152 ;; BANK2           96      0       0
+   153                           
+   154 ;;
+   155 ;; Pointer list with targets:
+   156                           
+   157                           
+   158                           
+   159 ;;
+   160 ;; Critical Paths under _main in COMMON
+   161 ;;
+   162 ;;   None.
+   163 ;;
+   164 ;; Critical Paths under _interupt in COMMON
+   165 ;;
+   166 ;;   None.
+   167 ;;
+   168 ;; Critical Paths under _main in BANK0
+   169 ;;
+   170 ;;   None.
+   171 ;;
+   172 ;; Critical Paths under _interupt in BANK0
+   173 ;;
+   174 ;;   None.
+   175 ;;
+   176 ;; Critical Paths under _main in BANK1
+   177 ;;
+   178 ;;   None.
+   179 ;;
+   180 ;; Critical Paths under _interupt in BANK1
+   181 ;;
+   182 ;;   None.
+   183 ;;
+   184 ;; Critical Paths under _main in BANK3
+   185 ;;
+   186 ;;   None.
+   187 ;;
+   188 ;; Critical Paths under _interupt in BANK3
+   189 ;;
+   190 ;;   None.
+   191 ;;
+   192 ;; Critical Paths under _main in BANK2
+   193 ;;
+   194 ;;   None.
+   195 ;;
+   196 ;; Critical Paths under _interupt in BANK2
+   197 ;;
+   198 ;;   None.
+   199                           
+   200 ;;
+   201 ;;Main: autosize = 0, tempsize = 3, incstack = 0, save=0
+   202 ;;
+   203                           
+   204 ;;
+   205 ;;Call Graph Tables:
+   206 ;;
+   207 ;; ---------------------------------------------------------------------------------
+   208 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   209 ;; ---------------------------------------------------------------------------------
+   210 ;; (0) _main                                                 3     3      0       0
+   211 ;;                                              5 COMMON     3     3      0
+   212 ;; ---------------------------------------------------------------------------------
+   213 ;; Estimated maximum stack depth 0
+   214 ;; ---------------------------------------------------------------------------------
+   215 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   216 ;; ---------------------------------------------------------------------------------
+   217 ;; (1) _interupt                                             5     5      0       0
+   218 ;;                                              0 COMMON     5     5      0
+   219 ;; ---------------------------------------------------------------------------------
+   220 ;; Estimated maximum stack depth 1
+   221 ;; ---------------------------------------------------------------------------------
+   222                           
+   223 ;; Call Graph Graphs:
+   224                           
+   225 ;; _main (ROOT)
+   226 ;;
+   227 ;; _interupt (ROOT)
+   228 ;;
+   229                           
+   230 ;; Address spaces:
+   231                           
+   232 ;;Name               Size   Autos  Total    Cost      Usage
+   233 ;;BITCOMMON            E      0       1       0        7.1%
+   234 ;;EEDATA             100      0       0       0        0.0%
+   235 ;;NULL                 0      0       0       0        0.0%
+   236 ;;CODE                 0      0       0       0        0.0%
+   237 ;;COMMON               E      8       A       1       71.4%
+   238 ;;BITSFR0              0      0       0       1        0.0%
+   239 ;;SFR0                 0      0       0       1        0.0%
+   240 ;;BITSFR1              0      0       0       2        0.0%
+   241 ;;SFR1                 0      0       0       2        0.0%
+   242 ;;STACK                0      0       0       2        0.0%
+   243 ;;ABS                  0      0       A       3        0.0%
+   244 ;;BITBANK0            50      0       0       4        0.0%
+   245 ;;BITSFR3              0      0       0       4        0.0%
+   246 ;;SFR3                 0      0       0       4        0.0%
+   247 ;;BANK0               50      0       0       5        0.0%
+   248 ;;BITSFR2              0      0       0       5        0.0%
+   249 ;;SFR2                 0      0       0       5        0.0%
+   250 ;;BITBANK1            50      0       0       6        0.0%
+   251 ;;BANK1               50      0       0       7        0.0%
+   252 ;;BITBANK3            60      0       0       8        0.0%
+   253 ;;BANK3               60      0       0       9        0.0%
+   254 ;;BITBANK2            60      0       0      10        0.0%
+   255 ;;BANK2               60      0       0      11        0.0%
+   256 ;;DATA                 0      0       A      12        0.0%
+   257                           
+   258                           	global	_main
+   259                           psect	maintext
+   260                           
+   261 ;; *************** function _main *****************
+   262 ;; Defined at:
+   263 ;;		line 40 in file "C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\temporizador\timer.
+       c"
+   264 ;; Parameters:    Size  Location     Type
+   265 ;;		None
+   266 ;; Auto vars:     Size  Location     Type
+   267 ;;		None
+   268 ;; Return value:  Size  Location     Type
+   269 ;;		None               void
+   270 ;; Registers used:
+   271 ;;		wreg
+   272 ;; Tracked objects:
+   273 ;;		On entry : 17F/0
+   274 ;;		On exit  : 0/0
+   275 ;;		Unchanged: 0/0
+   276 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   277 ;;      Params:         0       0       0       0       0
+   278 ;;      Locals:         0       0       0       0       0
+   279 ;;      Temps:          3       0       0       0       0
+   280 ;;      Totals:         3       0       0       0       0
+   281 ;;Total ram usage:        3 bytes
+   282 ;; Hardware stack levels required when called:    1
+   283 ;; This function calls:
+   284 ;;		Nothing
+   285 ;; This function is called by:
+   286 ;;		Startup code after reset
+   287 ;; This function uses a non-reentrant model
+   288 ;;
+   289                           psect	maintext
+   290                           	file	"C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\t
+                                 emporizador\timer.c"
+   291                           	line	40
+   292                           	global	__size_of_main
+   293  0078                     	__size_of_main	equ	__end_of_main-_main
+   294                           	
+   295  0015                     _main:	
+   296                           	opt	stack 7
+   297                           ; Regs used in _main: [wreg]
+   298                           	line	41
+   299                           	
+   300  0015                     l2618:	
+   301                           # 41 "C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\te
+                                 mporizador\timer.c"
+   302                           	psect config,class=CONFIG,delta=2 ;#
+   303                           # 41 "C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\te
+                                 mporizador\timer.c"
+   304  2007  FF3A               	dw 0xFFFF & 0xFFFB & 0xFFBF & 0xFFFF & 0xFFFE & 0xFFFF & 0xFF7F & 0xFFFF ;#
+   305                           psect	maintext
+   306                           	line	43
+   307                           ;timer.c: 43: TRISA0 = 1;
+   308  0015  1683               	bsf	status, 5	;RP0=1, select bank1
+   309  0016  1303               	bcf	status, 6	;RP1=0, select bank1
+   310  0017  1405               	bsf	(1064/8)^080h,(1064)&7
+   311                           	line	45
+   312                           	
+   313  0018                     l2620:	
+   314                           ;timer.c: 45: TRISB = 0b11111111;
+   315  0018  30FF               	movlw	(0FFh)
+   316  0019  0086               	movwf	(134)^080h	;volatile
+   317                           	line	46
+   318                           	
+   319  001A                     l2622:	
+   320                           ;timer.c: 46: TRISB1 = 0;
+   321  001A  1086               	bcf	(1073/8)^080h,(1073)&7
+   322                           	line	47
+   323                           	
+   324  001B                     l2624:	
+   325                           ;timer.c: 47: TRISB2 = 0;
+   326  001B  1106               	bcf	(1074/8)^080h,(1074)&7
+   327                           	line	48
+   328                           	
+   329  001C                     l2626:	
+   330                           ;timer.c: 48: TRISB3 = 0;
+   331  001C  1186               	bcf	(1075/8)^080h,(1075)&7
+   332                           	line	50
+   333                           	
+   334  001D                     l2628:	
+   335                           ;timer.c: 50: T0CS = 0;
+   336  001D  1281               	bcf	(1037/8)^080h,(1037)&7
+   337                           	line	51
+   338                           	
+   339  001E                     l2630:	
+   340                           ;timer.c: 51: T0SE = 0;
+   341  001E  1201               	bcf	(1036/8)^080h,(1036)&7
+   342                           	line	52
+   343                           	
+   344  001F                     l2632:	
+   345                           ;timer.c: 52: PSA = 0;
+   346  001F  1181               	bcf	(1035/8)^080h,(1035)&7
+   347                           	line	53
+   348                           	
+   349  0020                     l2634:	
+   350                           ;timer.c: 53: PS2 = 1;
+   351  0020  1501               	bsf	(1034/8)^080h,(1034)&7
+   352                           	line	54
+   353                           	
+   354  0021                     l2636:	
+   355                           ;timer.c: 54: PS1 = 1;
+   356  0021  1481               	bsf	(1033/8)^080h,(1033)&7
+   357                           	line	55
+   358                           	
+   359  0022                     l2638:	
+   360                           ;timer.c: 55: PS0 = 1;
+   361  0022  1401               	bsf	(1032/8)^080h,(1032)&7
+   362                           	line	57
+   363                           	
+   364  0023                     l2640:	
+   365                           ;timer.c: 57: TMR0IF = 0;
+   366  0023  110B               	bcf	(90/8),(90)&7
+   367                           	line	58
+   368                           	
+   369  0024                     l2642:	
+   370                           ;timer.c: 58: TMR0IE = 1;
+   371  0024  168B               	bsf	(93/8),(93)&7
+   372                           	line	59
+   373                           	
+   374  0025                     l2644:	
+   375                           ;timer.c: 59: PEIE = 1;
+   376  0025  170B               	bsf	(94/8),(94)&7
+   377                           	line	60
+   378                           	
+   379  0026                     l2646:	
+   380                           ;timer.c: 60: GIE = 1;
+   381  0026  178B               	bsf	(95/8),(95)&7
+   382                           	line	64
+   383                           	
+   384  0027                     l2648:	
+   385                           ;timer.c: 64: RB1 = 1;
+   386  0027  1283               	bcf	status, 5	;RP0=0, select bank0
+   387  0028  1303               	bcf	status, 6	;RP1=0, select bank0
+   388  0029  1486               	bsf	(49/8),(49)&7
+   389                           	line	65
+   390                           ;timer.c: 65: _delay((unsigned long)((500)*(20000000/4000.0)));
+   391                           	opt asmopt_off
+   392  002A  300D               movlw  13
+   393  002B  00F7               movwf	((??_main+0)+0+2),f
+   394  002C  30AF               movlw	175
+   395  002D  00F6               movwf	((??_main+0)+0+1),f
+   396  002E  30C1               	movlw	193
+   397  002F  00F5               movwf	((??_main+0)+0),f
+   398  0030                     u2267:
+   399  0030  0BF5               	decfsz	((??_main+0)+0),f
+   400  0031  2830               	goto	u2267
+   401  0032  0BF6               	decfsz	((??_main+0)+0+1),f
+   402  0033  2830               	goto	u2267
+   403  0034  0BF7               	decfsz	((??_main+0)+0+2),f
+   404  0035  2830               	goto	u2267
+   405  0036  0064               	clrwdt
+   406                           opt asmopt_on
+   407                           
+   408                           	line	66
+   409                           	
+   410  0037                     l2650:	
+   411                           ;timer.c: 66: RB1 = 0;
+   412  0037  1283               	bcf	status, 5	;RP0=0, select bank0
+   413  0038  1303               	bcf	status, 6	;RP1=0, select bank0
+   414  0039  1086               	bcf	(49/8),(49)&7
+   415                           	line	67
+   416                           ;timer.c: 67: _delay((unsigned long)((500)*(20000000/4000.0)));
+   417                           	opt asmopt_off
+   418  003A  300D               movlw  13
+   419  003B  00F7               movwf	((??_main+0)+0+2),f
+   420  003C  30AF               movlw	175
+   421  003D  00F6               movwf	((??_main+0)+0+1),f
+   422  003E  30C1               	movlw	193
+   423  003F  00F5               movwf	((??_main+0)+0),f
+   424  0040                     u2277:
+   425  0040  0BF5               	decfsz	((??_main+0)+0),f
+   426  0041  2840               	goto	u2277
+   427  0042  0BF6               	decfsz	((??_main+0)+0+1),f
+   428  0043  2840               	goto	u2277
+   429  0044  0BF7               	decfsz	((??_main+0)+0+2),f
+   430  0045  2840               	goto	u2277
+   431  0046  0064               	clrwdt
+   432                           opt asmopt_on
+   433                           
+   434                           	line	68
+   435                           	
+   436  0047                     l2652:	
+   437                           ;timer.c: 68: RB1 = 1;
+   438  0047  1283               	bcf	status, 5	;RP0=0, select bank0
+   439  0048  1303               	bcf	status, 6	;RP1=0, select bank0
+   440  0049  1486               	bsf	(49/8),(49)&7
+   441                           	line	69
+   442                           ;timer.c: 69: _delay((unsigned long)((500)*(20000000/4000.0)));
+   443                           	opt asmopt_off
+   444  004A  300D               movlw  13
+   445  004B  00F7               movwf	((??_main+0)+0+2),f
+   446  004C  30AF               movlw	175
+   447  004D  00F6               movwf	((??_main+0)+0+1),f
+   448  004E  30C1               	movlw	193
+   449  004F  00F5               movwf	((??_main+0)+0),f
+   450  0050                     u2287:
+   451  0050  0BF5               	decfsz	((??_main+0)+0),f
+   452  0051  2850               	goto	u2287
+   453  0052  0BF6               	decfsz	((??_main+0)+0+1),f
+   454  0053  2850               	goto	u2287
+   455  0054  0BF7               	decfsz	((??_main+0)+0+2),f
+   456  0055  2850               	goto	u2287
+   457  0056  0064               	clrwdt
+   458                           opt asmopt_on
+   459                           
+   460                           	line	70
+   461                           	
+   462  0057                     l2654:	
+   463                           ;timer.c: 70: RB1 = 0;
+   464  0057  1283               	bcf	status, 5	;RP0=0, select bank0
+   465  0058  1303               	bcf	status, 6	;RP1=0, select bank0
+   466  0059  1086               	bcf	(49/8),(49)&7
+   467                           	line	71
+   468                           ;timer.c: 71: _delay((unsigned long)((500)*(20000000/4000.0)));
+   469                           	opt asmopt_off
+   470  005A  300D               movlw  13
+   471  005B  00F7               movwf	((??_main+0)+0+2),f
+   472  005C  30AF               movlw	175
+   473  005D  00F6               movwf	((??_main+0)+0+1),f
+   474  005E  30C1               	movlw	193
+   475  005F  00F5               movwf	((??_main+0)+0),f
+   476  0060                     u2297:
+   477  0060  0BF5               	decfsz	((??_main+0)+0),f
+   478  0061  2860               	goto	u2297
+   479  0062  0BF6               	decfsz	((??_main+0)+0+1),f
+   480  0063  2860               	goto	u2297
+   481  0064  0BF7               	decfsz	((??_main+0)+0+2),f
+   482  0065  2860               	goto	u2297
+   483  0066  0064               	clrwdt
+   484                           opt asmopt_on
+   485                           
+   486  0067  2868               	goto	l2656
+   487                           	line	73
+   488                           ;timer.c: 73: while(1)
+   489                           	
+   490  0068                     l696:	
+   491                           	line	75
+   492                           	
+   493  0068                     l2656:	
+   494                           ;timer.c: 74: {
+   495                           ;timer.c: 75: RB1 = 1;
+   496  0068  1283               	bcf	status, 5	;RP0=0, select bank0
+   497  0069  1303               	bcf	status, 6	;RP1=0, select bank0
+   498  006A  1486               	bsf	(49/8),(49)&7
+   499                           	line	76
+   500                           ;timer.c: 76: _delay((unsigned long)((200)*(20000000/4000.0)));
+   501                           	opt asmopt_off
+   502  006B  3006               movlw  6
+   503  006C  00F7               movwf	((??_main+0)+0+2),f
+   504  006D  3013               movlw	19
+   505  006E  00F6               movwf	((??_main+0)+0+1),f
+   506  006F  30B1               	movlw	177
+   507  0070  00F5               movwf	((??_main+0)+0),f
+   508  0071                     u2307:
+   509  0071  0BF5               	decfsz	((??_main+0)+0),f
+   510  0072  2871               	goto	u2307
+   511  0073  0BF6               	decfsz	((??_main+0)+0+1),f
+   512  0074  2871               	goto	u2307
+   513  0075  0BF7               	decfsz	((??_main+0)+0+2),f
+   514  0076  2871               	goto	u2307
+   515  0077  2878               	nop2
+   516                           opt asmopt_on
+   517                           
+   518                           	line	77
+   519                           	
+   520  0078                     l2658:	
+   521                           ;timer.c: 77: RB1 = 0;
+   522  0078  1283               	bcf	status, 5	;RP0=0, select bank0
+   523  0079  1303               	bcf	status, 6	;RP1=0, select bank0
+   524  007A  1086               	bcf	(49/8),(49)&7
+   525                           	line	78
+   526                           ;timer.c: 78: _delay((unsigned long)((200)*(20000000/4000.0)));
+   527                           	opt asmopt_off
+   528  007B  3006               movlw  6
+   529  007C  00F7               movwf	((??_main+0)+0+2),f
+   530  007D  3013               movlw	19
+   531  007E  00F6               movwf	((??_main+0)+0+1),f
+   532  007F  30B1               	movlw	177
+   533  0080  00F5               movwf	((??_main+0)+0),f
+   534  0081                     u2317:
+   535  0081  0BF5               	decfsz	((??_main+0)+0),f
+   536  0082  2881               	goto	u2317
+   537  0083  0BF6               	decfsz	((??_main+0)+0+1),f
+   538  0084  2881               	goto	u2317
+   539  0085  0BF7               	decfsz	((??_main+0)+0+2),f
+   540  0086  2881               	goto	u2317
+   541  0087  2888               	nop2
+   542                           opt asmopt_on
+   543                           
+   544  0088  2868               	goto	l2656
+   545                           	line	79
+   546                           	
+   547  0089                     l697:	
+   548                           	line	73
+   549  0089  2868               	goto	l2656
+   550                           	
+   551  008A                     l698:	
+   552                           	line	81
+   553                           	
+   554  008A                     l699:	
+   555                           	global	start
+   556  008A  120A  118A  2812   	ljmp	start
+   557                           	opt stack 0
+   558                           GLOBAL	__end_of_main
+   559  008D                     	__end_of_main:
+   560 ;; =============== function _main ends ============
+   561                           
+   562                           	signat	_main,88
+   563                           	global	_interupt
+   564                           psect	text71,local,class=CODE,delta=2
+   565                           global __ptext71
+   566  008D                     __ptext71:
+   567                           
+   568 ;; *************** function _interupt *****************
+   569 ;; Defined at:
+   570 ;;		line 19 in file "C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\temporizador\timer.
+       c"
+   571 ;; Parameters:    Size  Location     Type
+   572 ;;		None
+   573 ;; Auto vars:     Size  Location     Type
+   574 ;;		None
+   575 ;; Return value:  Size  Location     Type
+   576 ;;		None               void
+   577 ;; Registers used:
+   578 ;;		wreg, status,2, status,0
+   579 ;; Tracked objects:
+   580 ;;		On entry : 0/0
+   581 ;;		On exit  : 0/0
+   582 ;;		Unchanged: 0/0
+   583 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   584 ;;      Params:         0       0       0       0       0
+   585 ;;      Locals:         0       0       0       0       0
+   586 ;;      Temps:          5       0       0       0       0
+   587 ;;      Totals:         5       0       0       0       0
+   588 ;;Total ram usage:        5 bytes
+   589 ;; Hardware stack levels used:    1
+   590 ;; This function calls:
+   591 ;;		Nothing
+   592 ;; This function is called by:
+   593 ;;		Interrupt level 1
+   594 ;; This function uses a non-reentrant model
+   595 ;;
+   596                           psect	text71
+   597                           	file	"C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\t
+                                 emporizador\timer.c"
+   598                           	line	19
+   599                           	global	__size_of_interupt
+   600  0029                     	__size_of_interupt	equ	__end_of_interupt-_interupt
+   601                           	
+   602  008D                     _interupt:	
+   603                           	opt	stack 7
+   604                           ; Regs used in _interupt: [wreg+status,2+status,0]
+   605                           psect	intentry,class=CODE,delta=2
+   606                           global __pintentry
+   607  0004                     __pintentry:
+   608                           global interrupt_function
+   609  0004                     interrupt_function:
+   610                           	global saved_w
+   611  007E                     	saved_w	set	btemp+0
+   612  0004  00FE               	movwf	saved_w
+   613  0005  0E03               	swapf	status,w
+   614  0006  00F1               	movwf	(??_interupt+1)
+   615  0007  0804               	movf	fsr0,w
+   616  0008  00F2               	movwf	(??_interupt+2)
+   617  0009  080A               	movf	pclath,w
+   618  000A  00F3               	movwf	(??_interupt+3)
+   619  000B  1283               	bcf	status, 5	;RP0=0, select bank0
+   620  000C  1303               	bcf	status, 6	;RP1=0, select bank0
+   621  000D  087F               	movf	btemp+1,w
+   622  000E  00F4               	movwf	(??_interupt+4)
+   623  000F  120A  118A  288D   	ljmp	_interupt
+   624                           psect	text71
+   625                           	line	20
+   626                           	
+   627  008D                     i1l1746:	
+   628                           ;timer.c: 20: if(TMR0IF)
+   629  008D  1D0B               	btfss	(90/8),(90)&7
+   630  008E  2890               	goto	u1_21
+   631  008F  2891               	goto	u1_20
+   632  0090                     u1_21:
+   633  0090  28AB               	goto	i1l693
+   634  0091                     u1_20:
+   635                           	line	22
+   636                           	
+   637  0091                     i1l1748:	
+   638                           ;timer.c: 21: {
+   639                           ;timer.c: 22: count ++;
+   640  0091  3001               	movlw	(01h)
+   641  0092  00F0               	movwf	(??_interupt+0)+0
+   642  0093  0870               	movf	(??_interupt+0)+0,w
+   643  0094  07F9               	addwf	(_count),f
+   644                           	line	23
+   645                           	
+   646  0095                     i1l1750:	
+   647                           ;timer.c: 23: if(count == 153)
+   648  0095  0879               	movf	(_count),w
+   649  0096  3A99               	xorlw	099h
+   650  0097  1D03               	skipz
+   651  0098  289A               	goto	u2_21
+   652  0099  289B               	goto	u2_20
+   653  009A                     u2_21:
+   654  009A  28A9               	goto	i1l1758
+   655  009B                     u2_20:
+   656                           	line	25
+   657                           	
+   658  009B                     i1l1752:	
+   659                           ;timer.c: 24: {
+   660                           ;timer.c: 25: RB3 = flag;
+   661  009B  1878               	btfsc	(_flag/8),(_flag)&7
+   662  009C  289E               	goto	u3_21
+   663  009D  28A2               	goto	u3_20
+   664                           	
+   665  009E                     u3_21:
+   666  009E  1283               	bcf	status, 5	;RP0=0, select bank0
+   667  009F  1303               	bcf	status, 6	;RP1=0, select bank0
+   668  00A0  1586               	bsf	(51/8),(51)&7
+   669  00A1  28A5               	goto	u4_24
+   670  00A2                     u3_20:
+   671  00A2  1283               	bcf	status, 5	;RP0=0, select bank0
+   672  00A3  1303               	bcf	status, 6	;RP1=0, select bank0
+   673  00A4  1186               	bcf	(51/8),(51)&7
+   674  00A5                     u4_24:
+   675                           	line	26
+   676                           	
+   677  00A5                     i1l1754:	
+   678                           ;timer.c: 26: flag = ~flag;
+   679  00A5  3001               	movlw	1<<((_flag)&7)
+   680  00A6  06F8               	xorwf	((_flag)/8),f
+   681                           	line	28
+   682                           	
+   683  00A7                     i1l1756:	
+   684                           ;timer.c: 28: count = 0;
+   685  00A7  01F9               	clrf	(_count)
+   686  00A8  28A9               	goto	i1l1758
+   687                           	line	29
+   688                           	
+   689  00A9                     i1l692:	
+   690                           	line	31
+   691                           	
+   692  00A9                     i1l1758:	
+   693                           ;timer.c: 29: }
+   694                           ;timer.c: 31: TMR0IF = 0;
+   695  00A9  110B               	bcf	(90/8),(90)&7
+   696  00AA  28AB               	goto	i1l693
+   697                           	line	32
+   698                           	
+   699  00AB                     i1l691:	
+   700                           	line	33
+   701                           	
+   702  00AB                     i1l693:	
+   703  00AB  0874               	movf	(??_interupt+4),w
+   704  00AC  00FF               	movwf	btemp+1
+   705  00AD  0873               	movf	(??_interupt+3),w
+   706  00AE  008A               	movwf	pclath
+   707  00AF  0872               	movf	(??_interupt+2),w
+   708  00B0  0084               	movwf	fsr0
+   709  00B1  0E71               	swapf	(??_interupt+1)^0FFFFFF80h,w
+   710  00B2  0083               	movwf	status
+   711  00B3  0EFE               	swapf	saved_w,f
+   712  00B4  0E7E               	swapf	saved_w,w
+   713  00B5  0009               	retfie
+   714                           	opt stack 0
+   715                           GLOBAL	__end_of_interupt
+   716  00B6                     	__end_of_interupt:
+   717 ;; =============== function _interupt ends ============
+   718                           
+   719                           	signat	_interupt,88
+   720                           psect	text72,local,class=CODE,delta=2
+   721                           global __ptext72
+   722  0000                     __ptext72:
+   723                           	global	btemp
+   724  007E                     	btemp set 07Eh
+   725                           
+   726                           	DABS	1,126,2	;btemp
+   727                           	global	wtemp0
+   728  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.83 build 10920 
+Symbol Table                                                                                   Fri Oct 11 19:04:55 2013
+
+                  _RD 0C60                    _WR 0C61                   l696 0068                   l697 0089  
+                 l698 008A                   l699 008A                   _GIE 005F                   _RB1 0031  
+                 _RB3 0033                   _PS0 0408                   _PS1 0409                   _PS2 040A  
+                 _PSA 040B                   fsr0 0004                  l2620 0018                  l2630 001E  
+                l2622 001A                  l2640 0023                  l2632 001F                  l2624 001B  
+                l2650 0037                  l2642 0024                  l2634 0020                  l2626 001C  
+                l2618 0015                  l2652 0047                  l2644 0025                  l2636 0021  
+                l2628 001D                  l2654 0057                  l2646 0026                  l2638 0022  
+                l2656 0068                  l2648 0027                  l2658 0078                  _T0CS 040D  
+                _T0SE 040C                  u2307 0071                  u2317 0081                  u2267 0030  
+                u2277 0040                  u2287 0050                  u2297 0060                  _PEIE 005E  
+                _WREN 0C62                  u1_20 0091                  u1_21 0090                  u2_20 009B  
+                u2_21 009A                  u3_20 00A2                  u3_21 009E                  u4_24 00A5  
+                _flag 03C0                  _main 0015                  btemp 007E                  start 0012  
+               ?_main 0070                 _EEADR 010D                 _CARRY 0018                 i1l691 00AB  
+               i1l692 00A9                 i1l693 00AB                 _TRISB 0086                 _count 0079  
+      __pbitbssCOMMON 03C0                 pclath 000A                 status 0003                 wtemp0 007E  
+        __end_of_main 008D                ??_main 0075                _EEDATA 010C                _EECON1 018C  
+              _EECON2 018D                i1l1750 0095                i1l1752 009B                i1l1754 00A5  
+              i1l1746 008D                i1l1756 00A7                i1l1748 0091                i1l1758 00A9  
+              _TMR0IE 005D                _TMR0IF 005A                _TRISA0 0428                _TRISB1 0431  
+              _TRISB2 0432                _TRISB3 0433      __end_of_interupt 00B6                saved_w 007E  
+      __pcstackCOMMON 0070            __pmaintext 0015            __pintentry 0004             ?_interupt 0070  
+end_of_initialization 00B8            ??_interupt 0070   start_initialization 00B6           __pbssCOMMON 0079  
+   __size_of_interupt 0029     interrupt_function 0004              __ptext71 008D              __ptext72 0000  
+       __size_of_main 0078              _interupt 008D              intlevel1 0000  

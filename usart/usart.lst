@@ -1,0 +1,1092 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.83 build 10920 
+                                                                                               Wed Nov 20 21:05:47 2013
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 10920"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F877A
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_printf
+    43                           	FNCALL	_main,_getch
+    44                           	FNCALL	_printf,_putch
+    45                           	FNROOT	_main
+    46                           	global	_input
+    47                           	global	_INTCON
+    48                           psect	text95,local,class=CODE,delta=2
+    49                           global __ptext95
+    50  0000                     __ptext95:
+    51  000B                     _INTCON	set	11
+    52                           	global	_RCREG
+    53  001A                     _RCREG	set	26
+    54                           	global	_RCSTA
+    55  0018                     _RCSTA	set	24
+    56                           	global	_TXREG
+    57  0019                     _TXREG	set	25
+    58                           	global	_CARRY
+    59  0018                     _CARRY	set	24
+    60                           	global	_GIE
+    61  005F                     _GIE	set	95
+    62                           	global	_RB1
+    63  0031                     _RB1	set	49
+    64                           	global	_RB2
+    65  0032                     _RB2	set	50
+    66                           	global	_RB3
+    67  0033                     _RB3	set	51
+    68                           	global	_RCIF
+    69  0065                     _RCIF	set	101
+    70                           	global	_TXIF
+    71  0064                     _TXIF	set	100
+    72                           	global	_SPBRG
+    73  0099                     _SPBRG	set	153
+    74                           	global	_TRISB
+    75  0086                     _TRISB	set	134
+    76                           	global	_TXSTA
+    77  0098                     _TXSTA	set	152
+    78                           	global	_TRISB1
+    79  0431                     _TRISB1	set	1073
+    80                           	global	_TRISB2
+    81  0432                     _TRISB2	set	1074
+    82                           	global	_TRISB3
+    83  0433                     _TRISB3	set	1075
+    84                           	global	_TRISC6
+    85  043E                     _TRISC6	set	1086
+    86                           	global	_TRISC7
+    87  043F                     _TRISC7	set	1087
+    88                           	global	_EEADR
+    89  010D                     _EEADR	set	269
+    90                           	global	_EEDATA
+    91  010C                     _EEDATA	set	268
+    92                           	global	_EECON1
+    93  018C                     _EECON1	set	396
+    94                           	global	_EECON2
+    95  018D                     _EECON2	set	397
+    96                           	global	_RD
+    97  0C60                     _RD	set	3168
+    98                           	global	_WR
+    99  0C61                     _WR	set	3169
+   100                           	global	_WREN
+   101  0C62                     _WREN	set	3170
+   102                           psect	strings,class=STRING,delta=2
+   103                           global __pstrings
+   104  0003                     __pstrings:
+   105                           ;	global	stringdir,stringtab,__stringbase
+   106  0003                     stringtab:
+   107                           ;	String table - string pointers are 1 byte each
+   108  0003                     stringcode:stringdir:
+      + 0003                     stringdir:	
+   109  0003  3000               movlw high(stringdir)
+   110  0004  008A               movwf pclath
+   111  0005  0804               movf fsr,w
+   112  0006  0A84               incf fsr
+   113  0007  0782               	addwf pc
+   114  0008                     __stringbase:
+   115  0008  3400               	retlw	0
+   116                           psect	strings
+   117                           	
+   118  0009                     STR_1:	
+   119  0009  340D               	retlw	13
+   120  000A  3450               	retlw	80	;'P'
+   121  000B  3472               	retlw	114	;'r'
+   122  000C  3465               	retlw	101	;'e'
+   123  000D  3473               	retlw	115	;'s'
+   124  000E  3473               	retlw	115	;'s'
+   125  000F  3420               	retlw	32	;' '
+   126  0010  3461               	retlw	97	;'a'
+   127  0011  3420               	retlw	32	;' '
+   128  0012  346B               	retlw	107	;'k'
+   129  0013  3461               	retlw	97	;'a'
+   130  0014  3479               	retlw	121	;'y'
+   131  0015  3420               	retlw	32	;' '
+   132  0016  3461               	retlw	97	;'a'
+   133  0017  346E               	retlw	110	;'n'
+   134  0018  3464               	retlw	100	;'d'
+   135  0019  3420               	retlw	32	;' '
+   136  001A  3449               	retlw	73	;'I'
+   137  001B  3420               	retlw	32	;' '
+   138  001C  3477               	retlw	119	;'w'
+   139  001D  3469               	retlw	105	;'i'
+   140  001E  346C               	retlw	108	;'l'
+   141  001F  346C               	retlw	108	;'l'
+   142  0020  3420               	retlw	32	;' '
+   143  0021  3465               	retlw	101	;'e'
+   144  0022  3463               	retlw	99	;'c'
+   145  0023  3468               	retlw	104	;'h'
+   146  0024  346F               	retlw	111	;'o'
+   147  0025  3420               	retlw	32	;' '
+   148  0026  3469               	retlw	105	;'i'
+   149  0027  3474               	retlw	116	;'t'
+   150  0028  3420               	retlw	32	;' '
+   151  0029  3462               	retlw	98	;'b'
+   152  002A  3461               	retlw	97	;'a'
+   153  002B  3463               	retlw	99	;'c'
+   154  002C  346B               	retlw	107	;'k'
+   155  002D  343A               	retlw	58	;':'
+   156  002E  340A               	retlw	10
+   157  002F  3400               	retlw	0
+   158                           psect	strings
+   159                           	
+   160  0030                     STR_2:	
+   161  0030  340D               	retlw	13
+   162  0031  3449               	retlw	73	;'I'
+   163  0032  3420               	retlw	32	;' '
+   164  0033  3464               	retlw	100	;'d'
+   165  0034  3465               	retlw	101	;'e'
+   166  0035  3474               	retlw	116	;'t'
+   167  0036  3465               	retlw	101	;'e'
+   168  0037  3463               	retlw	99	;'c'
+   169  0038  3474               	retlw	116	;'t'
+   170  0039  3465               	retlw	101	;'e'
+   171  003A  3464               	retlw	100	;'d'
+   172  003B  3420               	retlw	32	;' '
+   173  003C  345B               	retlw	91	;'['
+   174  003D  3425               	retlw	37	;'%'
+   175  003E  3463               	retlw	99	;'c'
+   176  003F  345D               	retlw	93	;']'
+   177  0040  3400               	retlw	0
+   178                           psect	strings
+   179                           	file	"usart.as"
+   180                           	line	#
+   181                           psect cinit,class=CODE,delta=2
+   182                           global start_initialization
+   183  0716                     start_initialization:
+   184                           
+   185                           psect	bssCOMMON,class=COMMON,space=1
+   186                           global __pbssCOMMON
+   187  007B                     __pbssCOMMON:
+   188  007B                     _input:
+   189  007B                            ds      1
+   190                           
+   191                           ; Clear objects allocated to COMMON
+   192                           psect cinit,class=CODE,delta=2
+   193  0716  01FB               	clrf	((__pbssCOMMON)+0)&07Fh
+   194                           psect cinit,class=CODE,delta=2
+   195                           global end_of_initialization
+   196                           
+   197                           ;End of C runtime variable initialization code
+   198                           
+   199  0717                     end_of_initialization:
+   200  0717  0183               clrf status
+   201  0718  120A  118A  2F83   ljmp _main	;jump to C main() function
+   202                           psect	cstackCOMMON,class=COMMON,space=1
+   203                           global __pcstackCOMMON
+   204  0070                     __pcstackCOMMON:
+   205                           	global	?_putch
+   206  0070                     ?_putch:	; 0 bytes @ 0x0
+   207                           	global	??_putch
+   208  0070                     ??_putch:	; 0 bytes @ 0x0
+   209                           	global	??_getch
+   210  0070                     ??_getch:	; 0 bytes @ 0x0
+   211                           	global	?_main
+   212  0070                     ?_main:	; 0 bytes @ 0x0
+   213                           	global	?_getch
+   214  0070                     ?_getch:	; 1 bytes @ 0x0
+   215                           	global	putch@byte
+   216  0070                     putch@byte:	; 1 bytes @ 0x0
+   217  0070                     	ds	1
+   218                           	global	?_printf
+   219  0071                     ?_printf:	; 2 bytes @ 0x1
+   220  0071                     	ds	2
+   221                           	global	??_printf
+   222  0073                     ??_printf:	; 0 bytes @ 0x3
+   223  0073                     	ds	1
+   224                           	global	printf@flag
+   225  0074                     printf@flag:	; 1 bytes @ 0x4
+   226  0074                     	ds	1
+   227                           	global	printf@ap
+   228  0075                     printf@ap:	; 1 bytes @ 0x5
+   229  0075                     	ds	1
+   230                           	global	printf@f
+   231  0076                     printf@f:	; 1 bytes @ 0x6
+   232  0076                     	ds	1
+   233                           	global	printf@c
+   234  0077                     printf@c:	; 1 bytes @ 0x7
+   235  0077                     	ds	1
+   236                           	global	??_main
+   237  0078                     ??_main:	; 0 bytes @ 0x8
+   238  0078                     	ds	3
+   239 ;;Data sizes: Strings 56, constant 0, data 0, bss 1, persistent 0 stack 0
+   240 ;;Auto spaces:   Size  Autos    Used
+   241 ;; COMMON          14     11      12
+   242 ;; BANK0           80      0       0
+   243 ;; BANK1           80      0       0
+   244 ;; BANK3           96      0       0
+   245 ;; BANK2           96      0       0
+   246                           
+   247 ;;
+   248 ;; Pointer list with targets:
+   249                           
+   250 ;; printf@f	PTR const unsigned char  size(1) Largest target is 39
+   251 ;;		 -> STR_2(CODE[17]), STR_1(CODE[39]), 
+   252 ;;
+   253 ;; ?_printf	int  size(1) Largest target is 0
+   254 ;;
+   255 ;; printf@ap	PTR void [1] size(1) Largest target is 2
+   256 ;;		 -> ?_printf(COMMON[2]), 
+   257 ;;
+   258 ;; S2086$_cp	PTR const unsigned char  size(1) Largest target is 0
+   259 ;;
+   260 ;; _val._str._cp	PTR const unsigned char  size(1) Largest target is 0
+   261 ;;
+   262                           
+   263                           
+   264 ;;
+   265 ;; Critical Paths under _main in COMMON
+   266 ;;
+   267 ;;   _main->_printf
+   268 ;;   _printf->_putch
+   269 ;;
+   270 ;; Critical Paths under _main in BANK0
+   271 ;;
+   272 ;;   None.
+   273 ;;
+   274 ;; Critical Paths under _main in BANK1
+   275 ;;
+   276 ;;   None.
+   277 ;;
+   278 ;; Critical Paths under _main in BANK3
+   279 ;;
+   280 ;;   None.
+   281 ;;
+   282 ;; Critical Paths under _main in BANK2
+   283 ;;
+   284 ;;   None.
+   285                           
+   286 ;;
+   287 ;;Main: autosize = 0, tempsize = 3, incstack = 0, save=0
+   288 ;;
+   289                           
+   290 ;;
+   291 ;;Call Graph Tables:
+   292 ;;
+   293 ;; ---------------------------------------------------------------------------------
+   294 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   295 ;; ---------------------------------------------------------------------------------
+   296 ;; (0) _main                                                 3     3      0     105
+   297 ;;                                              8 COMMON     3     3      0
+   298 ;;                             _printf
+   299 ;;                              _getch
+   300 ;; ---------------------------------------------------------------------------------
+   301 ;; (1) _printf                                              12    10      2     105
+   302 ;;                                              1 COMMON     7     5      2
+   303 ;;                              _putch
+   304 ;; ---------------------------------------------------------------------------------
+   305 ;; (1) _getch                                                0     0      0       0
+   306 ;; ---------------------------------------------------------------------------------
+   307 ;; (2) _putch                                                1     1      0      15
+   308 ;;                                              0 COMMON     1     1      0
+   309 ;; ---------------------------------------------------------------------------------
+   310 ;; Estimated maximum stack depth 2
+   311 ;; ---------------------------------------------------------------------------------
+   312                           
+   313 ;; Call Graph Graphs:
+   314                           
+   315 ;; _main (ROOT)
+   316 ;;   _printf
+   317 ;;     _putch
+   318 ;;   _getch
+   319 ;;
+   320                           
+   321 ;; Address spaces:
+   322                           
+   323 ;;Name               Size   Autos  Total    Cost      Usage
+   324 ;;BITCOMMON            E      0       0       0        0.0%
+   325 ;;EEDATA             100      0       0       0        0.0%
+   326 ;;NULL                 0      0       0       0        0.0%
+   327 ;;CODE                 0      0       0       0        0.0%
+   328 ;;COMMON               E      B       C       1       85.7%
+   329 ;;BITSFR0              0      0       0       1        0.0%
+   330 ;;SFR0                 0      0       0       1        0.0%
+   331 ;;BITSFR1              0      0       0       2        0.0%
+   332 ;;SFR1                 0      0       0       2        0.0%
+   333 ;;STACK                0      0       2       2        0.0%
+   334 ;;ABS                  0      0       C       3        0.0%
+   335 ;;BITBANK0            50      0       0       4        0.0%
+   336 ;;BITSFR3              0      0       0       4        0.0%
+   337 ;;SFR3                 0      0       0       4        0.0%
+   338 ;;BANK0               50      0       0       5        0.0%
+   339 ;;BITSFR2              0      0       0       5        0.0%
+   340 ;;SFR2                 0      0       0       5        0.0%
+   341 ;;BITBANK1            50      0       0       6        0.0%
+   342 ;;BANK1               50      0       0       7        0.0%
+   343 ;;BITBANK3            60      0       0       8        0.0%
+   344 ;;BANK3               60      0       0       9        0.0%
+   345 ;;BITBANK2            60      0       0      10        0.0%
+   346 ;;BANK2               60      0       0      11        0.0%
+   347 ;;DATA                 0      0       E      12        0.0%
+   348                           
+   349                           	global	_main
+   350                           psect	maintext,global,class=CODE,delta=2
+   351                           global __pmaintext
+   352  0783                     __pmaintext:
+   353                           
+   354 ;; *************** function _main *****************
+   355 ;; Defined at:
+   356 ;;		line 18 in file "C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\usart\echo.c"
+   357 ;; Parameters:    Size  Location     Type
+   358 ;;		None
+   359 ;; Auto vars:     Size  Location     Type
+   360 ;;		None
+   361 ;; Return value:  Size  Location     Type
+   362 ;;		None               void
+   363 ;; Registers used:
+   364 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+   365 ;; Tracked objects:
+   366 ;;		On entry : 17F/0
+   367 ;;		On exit  : 0/0
+   368 ;;		Unchanged: 0/0
+   369 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   370 ;;      Params:         0       0       0       0       0
+   371 ;;      Locals:         0       0       0       0       0
+   372 ;;      Temps:          3       0       0       0       0
+   373 ;;      Totals:         3       0       0       0       0
+   374 ;;Total ram usage:        3 bytes
+   375 ;; Hardware stack levels required when called:    2
+   376 ;; This function calls:
+   377 ;;		_printf
+   378 ;;		_getch
+   379 ;; This function is called by:
+   380 ;;		Startup code after reset
+   381 ;; This function uses a non-reentrant model
+   382 ;;
+   383                           psect	maintext
+   384                           	file	"C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\u
+                                 sart\echo.c"
+   385                           	line	18
+   386                           	global	__size_of_main
+   387  007D                     	__size_of_main	equ	__end_of_main-_main
+   388                           	
+   389  0783                     _main:	
+   390                           	opt	stack 6
+   391                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+   392                           	line	19
+   393                           	
+   394  0783                     l3349:	
+   395                           # 19 "C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\us
+                                 art\echo.c"
+   396                           	psect config,class=CONFIG,delta=2 ;#
+   397                           # 19 "C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\us
+                                 art\echo.c"
+   398  2007  FF3A               	dw 0xFFFF & 0xFFFB & 0xFFBF & 0xFFFF & 0xFFFE & 0xFFFF & 0xFF7F & 0xFFFF ;#
+   399                           psect	maintext
+   400                           	line	21
+   401                           	
+   402  0783                     l3351:	
+   403                           ;echo.c: 21: TRISB = 0b11111111;
+   404  0783  30FF               	movlw	(0FFh)
+   405  0784  1683               	bsf	status, 5	;RP0=1, select bank1
+   406  0785  1303               	bcf	status, 6	;RP1=0, select bank1
+   407  0786  0086               	movwf	(134)^080h	;volatile
+   408                           	line	22
+   409                           	
+   410  0787                     l3353:	
+   411                           ;echo.c: 22: TRISB1 = 0;
+   412  0787  1086               	bcf	(1073/8)^080h,(1073)&7
+   413                           	line	23
+   414                           	
+   415  0788                     l3355:	
+   416                           ;echo.c: 23: TRISB2 = 0;
+   417  0788  1106               	bcf	(1074/8)^080h,(1074)&7
+   418                           	line	24
+   419                           	
+   420  0789                     l3357:	
+   421                           ;echo.c: 24: TRISB3 = 0;
+   422  0789  1186               	bcf	(1075/8)^080h,(1075)&7
+   423                           	line	27
+   424                           	
+   425  078A                     l3359:	
+   426                           ;echo.c: 27: INTCON = 0;
+   427  078A  018B               	clrf	(11)	;volatile
+   428                           	line	29
+   429                           	
+   430  078B                     l3361:	
+   431                           ;echo.c: 29: TRISC7 = 1; TRISC6 = 1; SPBRG = ((int)(20000000/(16UL * 9600) -1)); RCSTA =
+                                  (0|0x90); TXSTA = (0x4|0|0x20);
+   432  078B  1787               	bsf	(1087/8)^080h,(1087)&7
+   433                           	
+   434  078C                     l3363:	
+   435  078C  1707               	bsf	(1086/8)^080h,(1086)&7
+   436                           	
+   437  078D                     l3365:	
+   438  078D  3081               	movlw	(081h)
+   439  078E  0099               	movwf	(153)^080h	;volatile
+   440                           	
+   441  078F                     l3367:	
+   442  078F  3090               	movlw	(090h)
+   443  0790  1283               	bcf	status, 5	;RP0=0, select bank0
+   444  0791  1303               	bcf	status, 6	;RP1=0, select bank0
+   445  0792  0098               	movwf	(24)	;volatile
+   446                           	
+   447  0793                     l3369:	
+   448  0793  3024               	movlw	(024h)
+   449  0794  1683               	bsf	status, 5	;RP0=1, select bank1
+   450  0795  1303               	bcf	status, 6	;RP1=0, select bank1
+   451  0796  0098               	movwf	(152)^080h	;volatile
+   452                           	line	32
+   453                           	
+   454  0797                     l3371:	
+   455                           ;echo.c: 32: RB1 = 0;
+   456  0797  1283               	bcf	status, 5	;RP0=0, select bank0
+   457  0798  1303               	bcf	status, 6	;RP1=0, select bank0
+   458  0799  1086               	bcf	(49/8),(49)&7
+   459                           	line	33
+   460                           	
+   461  079A                     l3373:	
+   462                           ;echo.c: 33: RB2 = 0;
+   463  079A  1106               	bcf	(50/8),(50)&7
+   464                           	line	34
+   465                           	
+   466  079B                     l3375:	
+   467                           ;echo.c: 34: RB3 = 0;
+   468  079B  1186               	bcf	(51/8),(51)&7
+   469                           	line	37
+   470                           	
+   471  079C                     l3377:	
+   472                           ;echo.c: 37: RB1 = 1;
+   473  079C  1486               	bsf	(49/8),(49)&7
+   474                           	line	38
+   475                           	
+   476  079D                     l3379:	
+   477                           ;echo.c: 38: _delay((unsigned long)((500)*(20000000/4000.0)));
+   478                           	opt asmopt_off
+   479  079D  300D               movlw  13
+   480  079E  00FA               movwf	((??_main+0)+0+2),f
+   481  079F  30AF               movlw	175
+   482  07A0  00F9               movwf	((??_main+0)+0+1),f
+   483  07A1  30C1               	movlw	193
+   484  07A2  00F8               movwf	((??_main+0)+0),f
+   485  07A3                     u2267:
+   486  07A3  0BF8               	decfsz	((??_main+0)+0),f
+   487  07A4  2FA3               	goto	u2267
+   488  07A5  0BF9               	decfsz	((??_main+0)+0+1),f
+   489  07A6  2FA3               	goto	u2267
+   490  07A7  0BFA               	decfsz	((??_main+0)+0+2),f
+   491  07A8  2FA3               	goto	u2267
+   492  07A9  0064               	clrwdt
+   493                           opt asmopt_on
+   494                           
+   495                           	line	39
+   496                           	
+   497  07AA                     l3381:	
+   498                           ;echo.c: 39: RB1 = 0;
+   499  07AA  1283               	bcf	status, 5	;RP0=0, select bank0
+   500  07AB  1303               	bcf	status, 6	;RP1=0, select bank0
+   501  07AC  1086               	bcf	(49/8),(49)&7
+   502                           	line	40
+   503                           	
+   504  07AD                     l3383:	
+   505                           ;echo.c: 40: _delay((unsigned long)((500)*(20000000/4000.0)));
+   506                           	opt asmopt_off
+   507  07AD  300D               movlw  13
+   508  07AE  00FA               movwf	((??_main+0)+0+2),f
+   509  07AF  30AF               movlw	175
+   510  07B0  00F9               movwf	((??_main+0)+0+1),f
+   511  07B1  30C1               	movlw	193
+   512  07B2  00F8               movwf	((??_main+0)+0),f
+   513  07B3                     u2277:
+   514  07B3  0BF8               	decfsz	((??_main+0)+0),f
+   515  07B4  2FB3               	goto	u2277
+   516  07B5  0BF9               	decfsz	((??_main+0)+0+1),f
+   517  07B6  2FB3               	goto	u2277
+   518  07B7  0BFA               	decfsz	((??_main+0)+0+2),f
+   519  07B8  2FB3               	goto	u2277
+   520  07B9  0064               	clrwdt
+   521                           opt asmopt_on
+   522                           
+   523                           	line	41
+   524                           	
+   525  07BA                     l3385:	
+   526                           ;echo.c: 41: RB1 = 1;
+   527  07BA  1283               	bcf	status, 5	;RP0=0, select bank0
+   528  07BB  1303               	bcf	status, 6	;RP1=0, select bank0
+   529  07BC  1486               	bsf	(49/8),(49)&7
+   530                           	line	42
+   531                           	
+   532  07BD                     l3387:	
+   533                           ;echo.c: 42: _delay((unsigned long)((500)*(20000000/4000.0)));
+   534                           	opt asmopt_off
+   535  07BD  300D               movlw  13
+   536  07BE  00FA               movwf	((??_main+0)+0+2),f
+   537  07BF  30AF               movlw	175
+   538  07C0  00F9               movwf	((??_main+0)+0+1),f
+   539  07C1  30C1               	movlw	193
+   540  07C2  00F8               movwf	((??_main+0)+0),f
+   541  07C3                     u2287:
+   542  07C3  0BF8               	decfsz	((??_main+0)+0),f
+   543  07C4  2FC3               	goto	u2287
+   544  07C5  0BF9               	decfsz	((??_main+0)+0+1),f
+   545  07C6  2FC3               	goto	u2287
+   546  07C7  0BFA               	decfsz	((??_main+0)+0+2),f
+   547  07C8  2FC3               	goto	u2287
+   548  07C9  0064               	clrwdt
+   549                           opt asmopt_on
+   550                           
+   551                           	line	43
+   552                           	
+   553  07CA                     l3389:	
+   554                           ;echo.c: 43: RB1 = 0;
+   555  07CA  1283               	bcf	status, 5	;RP0=0, select bank0
+   556  07CB  1303               	bcf	status, 6	;RP1=0, select bank0
+   557  07CC  1086               	bcf	(49/8),(49)&7
+   558                           	line	44
+   559                           	
+   560  07CD                     l3391:	
+   561                           ;echo.c: 44: _delay((unsigned long)((500)*(20000000/4000.0)));
+   562                           	opt asmopt_off
+   563  07CD  300D               movlw  13
+   564  07CE  00FA               movwf	((??_main+0)+0+2),f
+   565  07CF  30AF               movlw	175
+   566  07D0  00F9               movwf	((??_main+0)+0+1),f
+   567  07D1  30C1               	movlw	193
+   568  07D2  00F8               movwf	((??_main+0)+0),f
+   569  07D3                     u2297:
+   570  07D3  0BF8               	decfsz	((??_main+0)+0),f
+   571  07D4  2FD3               	goto	u2297
+   572  07D5  0BF9               	decfsz	((??_main+0)+0+1),f
+   573  07D6  2FD3               	goto	u2297
+   574  07D7  0BFA               	decfsz	((??_main+0)+0+2),f
+   575  07D8  2FD3               	goto	u2297
+   576  07D9  0064               	clrwdt
+   577                           opt asmopt_on
+   578                           
+   579                           	line	47
+   580                           	
+   581  07DA                     l3393:	
+   582                           ;echo.c: 47: RB1 = 0;
+   583  07DA  1283               	bcf	status, 5	;RP0=0, select bank0
+   584  07DB  1303               	bcf	status, 6	;RP1=0, select bank0
+   585  07DC  1086               	bcf	(49/8),(49)&7
+   586                           	line	48
+   587                           	
+   588  07DD                     l3395:	
+   589                           ;echo.c: 48: RB2 = 0;
+   590  07DD  1106               	bcf	(50/8),(50)&7
+   591                           	line	49
+   592                           	
+   593  07DE                     l3397:	
+   594                           ;echo.c: 49: RB3 = 0;
+   595  07DE  1186               	bcf	(51/8),(51)&7
+   596                           	line	51
+   597                           	
+   598  07DF                     l3399:	
+   599                           ;echo.c: 51: printf("\rPress a kay and I will echo it back:\n");
+   600  07DF  3001               	movlw	((STR_1-__stringbase))&0ffh
+   601  07E0  120A  118A  2732   	fcall	_printf
+              120A  118A         
+   602  07E5  2FE6               	goto	l3401
+   603                           	line	52
+   604                           ;echo.c: 52: while(1)
+   605                           	
+   606  07E6                     l1390:	
+   607                           	line	54
+   608                           	
+   609  07E6                     l3401:	
+   610                           ;echo.c: 53: {
+   611                           ;echo.c: 54: input = getch();
+   612  07E6  120A  118A  271B   	fcall	_getch
+              120A  118A         
+   613  07EB  00F8               	movwf	(??_main+0)+0
+   614  07EC  0878               	movf	(??_main+0)+0,w
+   615  07ED  00FB               	movwf	(_input)
+   616                           	line	55
+   617                           	
+   618  07EE                     l3403:	
+   619                           ;echo.c: 55: printf("\rI detected [%c]",input);
+   620  07EE  087B               	movf	(_input),w
+   621  07EF  00F8               	movwf	(??_main+0)+0
+   622  07F0  01F9               	clrf	(??_main+0)+0+1
+   623  07F1  0878               	movf	0+(??_main+0)+0,w
+   624  07F2  00F1               	movwf	(?_printf)
+   625  07F3  0879               	movf	1+(??_main+0)+0,w
+   626  07F4  00F2               	movwf	(?_printf+1)
+   627  07F5  3028               	movlw	((STR_2-__stringbase))&0ffh
+   628  07F6  120A  118A  2732   	fcall	_printf
+              120A  118A         
+   629  07FB  2FE6               	goto	l3401
+   630                           	line	56
+   631                           	
+   632  07FC                     l1391:	
+   633                           	line	52
+   634  07FC  2FE6               	goto	l3401
+   635                           	
+   636  07FD                     l1392:	
+   637                           	line	58
+   638                           	
+   639  07FD                     l1393:	
+   640                           	global	start
+   641  07FD  120A  118A  2800   	ljmp	start
+   642                           	opt stack 0
+   643                           GLOBAL	__end_of_main
+   644  0800                     	__end_of_main:
+   645 ;; =============== function _main ends ============
+   646                           
+   647                           	signat	_main,88
+   648                           	global	_printf
+   649                           psect	text96,local,class=CODE,delta=2
+   650                           global __ptext96
+   651  0732                     __ptext96:
+   652                           
+   653 ;; *************** function _printf *****************
+   654 ;; Defined at:
+   655 ;;		line 461 in file "C:\Arquivos de programas\HI-TECH Software\PICC\9.83\lib\doprnt.c"
+   656 ;; Parameters:    Size  Location     Type
+   657 ;;  f               1    wreg     PTR const unsigned char 
+   658 ;;		 -> STR_2(17), STR_1(39), 
+   659 ;; Auto vars:     Size  Location     Type
+   660 ;;  f               1    6[COMMON] PTR const unsigned char 
+   661 ;;		 -> STR_2(17), STR_1(39), 
+   662 ;;  _val            4    0        struct .
+   663 ;;  c               1    7[COMMON] char 
+   664 ;;  ap              1    5[COMMON] PTR void [1]
+   665 ;;		 -> ?_printf(2), 
+   666 ;;  flag            1    4[COMMON] unsigned char 
+   667 ;;  prec            1    0        char 
+   668 ;; Return value:  Size  Location     Type
+   669 ;;                  2    1[COMMON] int 
+   670 ;; Registers used:
+   671 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+   672 ;; Tracked objects:
+   673 ;;		On entry : 0/0
+   674 ;;		On exit  : 0/0
+   675 ;;		Unchanged: 0/0
+   676 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   677 ;;      Params:         2       0       0       0       0
+   678 ;;      Locals:         4       0       0       0       0
+   679 ;;      Temps:          1       0       0       0       0
+   680 ;;      Totals:         7       0       0       0       0
+   681 ;;Total ram usage:        7 bytes
+   682 ;; Hardware stack levels used:    1
+   683 ;; Hardware stack levels required when called:    1
+   684 ;; This function calls:
+   685 ;;		_putch
+   686 ;; This function is called by:
+   687 ;;		_main
+   688 ;; This function uses a non-reentrant model
+   689 ;;
+   690                           psect	text96
+   691                           	file	"C:\Arquivos de programas\HI-TECH Software\PICC\9.83\sources\doprnt.c"
+   692                           	line	461
+   693                           	global	__size_of_printf
+   694  0051                     	__size_of_printf	equ	__end_of_printf-_printf
+   695                           	
+   696  0732                     _printf:	
+   697                           	opt	stack 6
+   698                           ; Regs used in _printf: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+   699                           ;printf@f stored from wreg
+   700                           	line	537
+   701  0732  00F6               	movwf	(printf@f)
+   702                           	
+   703  0733                     l3331:	
+   704  0733  3071               	movlw	(?_printf)&0ffh
+   705  0734  00F3               	movwf	(??_printf+0)+0
+   706  0735  0873               	movf	(??_printf+0)+0,w
+   707  0736  00F5               	movwf	(printf@ap)
+   708                           	line	540
+   709  0737  2F6E               	goto	l3347
+   710                           	
+   711  0738                     l1403:	
+   712                           	line	542
+   713                           	
+   714  0738                     l3333:	
+   715  0738  0877               	movf	(printf@c),w
+   716  0739  3A25               	xorlw	025h
+   717  073A  1903               	skipnz
+   718  073B  2F3D               	goto	u2241
+   719  073C  2F3E               	goto	u2240
+   720  073D                     u2241:
+   721  073D  2F45               	goto	l1404
+   722  073E                     u2240:
+   723                           	line	545
+   724                           	
+   725  073E                     l3335:	
+   726  073E  0877               	movf	(printf@c),w
+   727  073F  120A  118A  2726   	fcall	_putch
+              120A  118A         
+   728                           	line	546
+   729  0744  2F6E               	goto	l3347
+   730                           	line	547
+   731                           	
+   732  0745                     l1404:	
+   733                           	line	552
+   734  0745  01F4               	clrf	(printf@flag)
+   735                           	line	638
+   736  0746  2F5B               	goto	l3345
+   737                           	line	640
+   738                           	
+   739  0747                     l1406:	
+   740                           	line	641
+   741  0747  2F82               	goto	l1412
+   742                           	line	787
+   743                           	
+   744  0748                     l1408:	
+   745                           	line	802
+   746                           	
+   747  0748                     l3337:	
+   748  0748  0875               	movf	(printf@ap),w
+   749  0749  0084               	movwf	fsr0
+   750  074A  0800               	movf	indf,w
+   751  074B  00F3               	movwf	(??_printf+0)+0
+   752  074C  0873               	movf	(??_printf+0)+0,w
+   753  074D  00F7               	movwf	(printf@c)
+   754                           	
+   755  074E                     l3339:	
+   756  074E  3002               	movlw	(02h)
+   757  074F  00F3               	movwf	(??_printf+0)+0
+   758  0750  0873               	movf	(??_printf+0)+0,w
+   759  0751  07F5               	addwf	(printf@ap),f
+   760  0752  2F53               	goto	l3341
+   761                           	line	805
+   762                           	
+   763  0753                     l1409:	
+   764                           	line	812
+   765                           	
+   766  0753                     l3341:	
+   767  0753  0877               	movf	(printf@c),w
+   768  0754  120A  118A  2726   	fcall	_putch
+              120A  118A         
+   769                           	line	813
+   770  0759  2F6E               	goto	l3347
+   771                           	line	825
+   772                           	
+   773  075A                     l3343:	
+   774  075A  2F6E               	goto	l3347
+   775                           	line	638
+   776                           	
+   777  075B                     l1405:	
+   778                           	
+   779  075B                     l3345:	
+   780  075B  3001               	movlw	01h
+   781  075C  07F6               	addwf	(printf@f),f
+   782  075D  30FF               	movlw	-01h
+   783  075E  0776               	addwf	(printf@f),w
+   784  075F  0084               	movwf	fsr0
+   785  0760  120A  118A  2003   	fcall	stringdir
+              120A  118A         
+   786  0765  00F7               	movwf	(printf@c)
+   787                           	; Switch size 1, requested type "space"
+   788                           ; Number of cases is 2, Range of values is 0 to 99
+   789                           ; switch strategies available:
+   790                           ; Name         Instructions Cycles
+   791                           ; simple_byte            7     4 (average)
+   792                           ; jumptable            260     6 (fixed)
+   793                           ; rangetable           104     6 (fixed)
+   794                           ; spacedrange          206     9 (fixed)
+   795                           ; locatedrange         100     3 (fixed)
+   796                           ;	Chosen strategy is simple_byte
+   797                           
+   798                           	opt asmopt_off
+   799  0766  3A00               	xorlw	0^0	; case 0
+   800  0767  1903               	skipnz
+   801  0768  2F82               	goto	l1412
+   802  0769  3A63               	xorlw	99^0	; case 99
+   803  076A  1903               	skipnz
+   804  076B  2F48               	goto	l3337
+   805  076C  2F53               	goto	l3341
+   806                           	opt asmopt_on
+   807                           
+   808                           	line	825
+   809                           	
+   810  076D                     l1410:	
+   811  076D  2F6E               	goto	l3347
+   812                           	line	1525
+   813                           	
+   814  076E                     l1402:	
+   815                           	line	540
+   816                           	
+   817  076E                     l3347:	
+   818  076E  3001               	movlw	01h
+   819  076F  07F6               	addwf	(printf@f),f
+   820  0770  30FF               	movlw	-01h
+   821  0771  0776               	addwf	(printf@f),w
+   822  0772  0084               	movwf	fsr0
+   823  0773  120A  118A  2003   	fcall	stringdir
+              120A  118A         
+   824  0778  00F3               	movwf	(??_printf+0)+0
+   825  0779  0873               	movf	(??_printf+0)+0,w
+   826  077A  00F7               	movwf	(printf@c)
+   827  077B  08F7               	movf	((printf@c)),f
+   828  077C  1D03               	skipz
+   829  077D  2F7F               	goto	u2251
+   830  077E  2F80               	goto	u2250
+   831  077F                     u2251:
+   832  077F  2F38               	goto	l3333
+   833  0780                     u2250:
+   834  0780  2F82               	goto	l1412
+   835                           	
+   836  0781                     l1411:	
+   837  0781  2F82               	goto	l1412
+   838                           	line	1527
+   839                           	
+   840  0782                     l1407:	
+   841                           	line	1533
+   842                           ;	Return value of _printf is never used
+   843                           	
+   844  0782                     l1412:	
+   845  0782  0008               	return
+   846                           	opt stack 0
+   847                           GLOBAL	__end_of_printf
+   848  0783                     	__end_of_printf:
+   849 ;; =============== function _printf ends ============
+   850                           
+   851                           	signat	_printf,602
+   852                           	global	_getch
+   853                           psect	text97,local,class=CODE,delta=2
+   854                           global __ptext97
+   855  071B                     __ptext97:
+   856                           
+   857 ;; *************** function _getch *****************
+   858 ;; Defined at:
+   859 ;;		line 16 in file "C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\usart\usart.c"
+   860 ;; Parameters:    Size  Location     Type
+   861 ;;		None
+   862 ;; Auto vars:     Size  Location     Type
+   863 ;;		None
+   864 ;; Return value:  Size  Location     Type
+   865 ;;                  1    wreg      unsigned char 
+   866 ;; Registers used:
+   867 ;;		wreg
+   868 ;; Tracked objects:
+   869 ;;		On entry : 0/0
+   870 ;;		On exit  : 0/0
+   871 ;;		Unchanged: 0/0
+   872 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   873 ;;      Params:         0       0       0       0       0
+   874 ;;      Locals:         0       0       0       0       0
+   875 ;;      Temps:          0       0       0       0       0
+   876 ;;      Totals:         0       0       0       0       0
+   877 ;;Total ram usage:        0 bytes
+   878 ;; Hardware stack levels used:    1
+   879 ;; This function calls:
+   880 ;;		Nothing
+   881 ;; This function is called by:
+   882 ;;		_main
+   883 ;;		_getche
+   884 ;; This function uses a non-reentrant model
+   885 ;;
+   886                           psect	text97
+   887                           	file	"C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\u
+                                 sart\usart.c"
+   888                           	line	16
+   889                           	global	__size_of_getch
+   890  000B                     	__size_of_getch	equ	__end_of_getch-_getch
+   891                           	
+   892  071B                     _getch:	
+   893                           	opt	stack 7
+   894                           ; Regs used in _getch: [wreg]
+   895                           	line	18
+   896                           	
+   897  071B                     l2463:	
+   898                           ;usart.c: 18: while(!RCIF)
+   899  071B  2F1C               	goto	l691
+   900                           	
+   901  071C                     l692:	
+   902                           	line	19
+   903                           ;usart.c: 19: continue;
+   904                           	
+   905  071C                     l691:	
+   906                           	line	18
+   907  071C  1283               	bcf	status, 5	;RP0=0, select bank0
+   908  071D  1303               	bcf	status, 6	;RP1=0, select bank0
+   909  071E  1E8C               	btfss	(101/8),(101)&7
+   910  071F  2F21               	goto	u21
+   911  0720  2F22               	goto	u20
+   912  0721                     u21:
+   913  0721  2F1C               	goto	l691
+   914  0722                     u20:
+   915  0722  2F23               	goto	l2465
+   916                           	
+   917  0723                     l693:	
+   918                           	line	20
+   919                           	
+   920  0723                     l2465:	
+   921                           ;usart.c: 20: return RCREG;
+   922  0723  081A               	movf	(26),w	;volatile
+   923  0724  2F25               	goto	l694
+   924                           	
+   925  0725                     l2467:	
+   926                           	line	21
+   927                           	
+   928  0725                     l694:	
+   929  0725  0008               	return
+   930                           	opt stack 0
+   931                           GLOBAL	__end_of_getch
+   932  0726                     	__end_of_getch:
+   933 ;; =============== function _getch ends ============
+   934                           
+   935                           	signat	_getch,89
+   936                           	global	_putch
+   937                           psect	text98,local,class=CODE,delta=2
+   938                           global __ptext98
+   939  0726                     __ptext98:
+   940                           
+   941 ;; *************** function _putch *****************
+   942 ;; Defined at:
+   943 ;;		line 8 in file "C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\usart\usart.c"
+   944 ;; Parameters:    Size  Location     Type
+   945 ;;  byte            1    wreg     unsigned char 
+   946 ;; Auto vars:     Size  Location     Type
+   947 ;;  byte            1    0[COMMON] unsigned char 
+   948 ;; Return value:  Size  Location     Type
+   949 ;;		None               void
+   950 ;; Registers used:
+   951 ;;		wreg
+   952 ;; Tracked objects:
+   953 ;;		On entry : 0/0
+   954 ;;		On exit  : 0/0
+   955 ;;		Unchanged: 0/0
+   956 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   957 ;;      Params:         0       0       0       0       0
+   958 ;;      Locals:         1       0       0       0       0
+   959 ;;      Temps:          0       0       0       0       0
+   960 ;;      Totals:         1       0       0       0       0
+   961 ;;Total ram usage:        1 bytes
+   962 ;; Hardware stack levels used:    1
+   963 ;; This function calls:
+   964 ;;		Nothing
+   965 ;; This function is called by:
+   966 ;;		_printf
+   967 ;;		_getche
+   968 ;; This function uses a non-reentrant model
+   969 ;;
+   970                           psect	text98
+   971                           	file	"C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\u
+                                 sart\usart.c"
+   972                           	line	8
+   973                           	global	__size_of_putch
+   974  000C                     	__size_of_putch	equ	__end_of_putch-_putch
+   975                           	
+   976  0726                     _putch:	
+   977                           	opt	stack 6
+   978                           ; Regs used in _putch: [wreg]
+   979                           ;putch@byte stored from wreg
+   980  0726  00F0               	movwf	(putch@byte)
+   981                           	line	10
+   982                           	
+   983  0727                     l2459:	
+   984                           ;usart.c: 10: while(!TXIF)
+   985  0727  2F28               	goto	l685
+   986                           	
+   987  0728                     l686:	
+   988                           	line	11
+   989                           ;usart.c: 11: continue;
+   990                           	
+   991  0728                     l685:	
+   992                           	line	10
+   993  0728  1283               	bcf	status, 5	;RP0=0, select bank0
+   994  0729  1303               	bcf	status, 6	;RP1=0, select bank0
+   995  072A  1E0C               	btfss	(100/8),(100)&7
+   996  072B  2F2D               	goto	u11
+   997  072C  2F2E               	goto	u10
+   998  072D                     u11:
+   999  072D  2F28               	goto	l685
+  1000  072E                     u10:
+  1001  072E  2F2F               	goto	l2461
+  1002                           	
+  1003  072F                     l687:	
+  1004                           	line	12
+  1005                           	
+  1006  072F                     l2461:	
+  1007                           ;usart.c: 12: TXREG = byte;
+  1008  072F  0870               	movf	(putch@byte),w
+  1009  0730  0099               	movwf	(25)	;volatile
+  1010                           	line	13
+  1011                           	
+  1012  0731                     l688:	
+  1013  0731  0008               	return
+  1014                           	opt stack 0
+  1015                           GLOBAL	__end_of_putch
+  1016  0732                     	__end_of_putch:
+  1017 ;; =============== function _putch ends ============
+  1018                           
+  1019                           	signat	_putch,4216
+  1020                           psect	text99,local,class=CODE,delta=2
+  1021                           global __ptext99
+  1022  0000                     __ptext99:
+  1023                           	global	btemp
+  1024  007E                     	btemp set 07Eh
+  1025                           
+  1026                           	DABS	1,126,2	;btemp
+  1027                           	global	wtemp0
+  1028  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.83 build 10920 
+Symbol Table                                                                                   Wed Nov 20 21:05:47 2013
+
+                   pc 0002                    _RD 0C60                    u10 072E                    u11 072D  
+                  u20 0722                    u21 0721                    _WR 0C61                    fsr 0004  
+                 l691 071C                   l692 071C                   l685 0728                   l693 0723  
+                 l686 0728                   l694 0725                   l687 072F                   l688 0731  
+                 _GIE 005F                   _RB1 0031                   _RB2 0032                   _RB3 0033  
+                 fsr0 0004                   indf 0000                  l1402 076E                  l1410 076D  
+                l1411 0781                  l1403 0738                  l1412 0782                  l1404 0745  
+                l1405 075B                  l1406 0747                  l1407 0782                  l1408 0748  
+                l1409 0753                  l1390 07E6                  l1391 07FC                  l1392 07FD  
+                l1393 07FD                  l3401 07E6                  l3331 0733                  l3403 07EE  
+                l2461 072F                  l3341 0753                  l3333 0738                  l2463 071B  
+                l3343 075A                  l3335 073E                  l3351 0783                  l2465 0723  
+                l3337 0748                  l3345 075B                  l3361 078B                  l3353 0787  
+                l2459 0727                  l2467 0725                  l3339 074E                  l3347 076E  
+                l3371 0797                  l3363 078C                  l3355 0788                  l3381 07AA  
+                l3373 079A                  l3365 078D                  l3357 0789                  l3349 0783  
+                l3391 07CD                  l3383 07AD                  l3375 079B                  l3367 078F  
+                l3359 078A                  l3393 07DA                  l3385 07BA                  l3377 079C  
+                l3369 0793                  l3395 07DD                  l3387 07BD                  l3379 079D  
+                l3397 07DE                  l3389 07CA                  l3399 07DF                  STR_1 0009  
+                STR_2 0030                  u2240 073E                  u2241 073D                  u2250 0780  
+                u2251 077F                  u2267 07A3                  u2277 07B3                  u2287 07C3  
+                u2297 07D3                  _RCIF 0065                  _WREN 0C62                  _TXIF 0064  
+                _main 0783                  btemp 007E                  start 0000                 ?_main 0070  
+               _EEADR 010D                 _CARRY 0018                 _RCREG 001A                 _RCSTA 0018  
+               _SPBRG 0099                 _TRISB 0086                 _TXREG 0019                 _TXSTA 0098  
+               _getch 071B                 _input 007B                 _putch 0726                 pclath 000A  
+               status 0003                 wtemp0 007E          __end_of_main 0800                ??_main 0078  
+              ?_getch 0070                _EEDATA 010C                _EECON1 018C                _EECON2 018D  
+              ?_putch 0070                _INTCON 000B                _TRISB1 0431                _TRISB2 0432  
+              _TRISB3 0433                _TRISC6 043E                _TRISC7 043F                _printf 0732  
+      __pcstackCOMMON 0070         __end_of_getch 0726         __end_of_putch 0732               ??_getch 0070  
+             ??_putch 0070            __pmaintext 0783               ?_printf 0071       __size_of_printf 0051  
+end_of_initialization 0717               printf@c 0077               printf@f 0076        __end_of_printf 0783  
+ start_initialization 0716              ??_printf 0073           __pbssCOMMON 007B             __pstrings 0003  
+      __size_of_getch 000B        __size_of_putch 000C           __stringbase 0008            printf@flag 0074  
+            __ptext95 0000              __ptext96 0732              __ptext97 071B              __ptext98 0726  
+            __ptext99 0000         __size_of_main 007D             putch@byte 0070             stringcode 0003  
+            printf@ap 0075              stringdir 0003              stringtab 0003  

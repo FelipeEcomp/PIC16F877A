@@ -1,0 +1,773 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.83 build 10920 
+                                                                                               Wed Oct 23 19:47:51 2013
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 10920"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F877A
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNROOT	_main
+    43                           	global	_CARRY
+    44                           psect	maintext,global,class=CODE,delta=2
+    45                           global __pmaintext
+    46  0708                     __pmaintext:
+    47  0018                     _CARRY	set	24
+    48                           	global	_CMIF
+    49  006E                     _CMIF	set	110
+    50                           	global	_GIE
+    51  005F                     _GIE	set	95
+    52                           	global	_PEIE
+    53  005E                     _PEIE	set	94
+    54                           	global	_RB1
+    55  0031                     _RB1	set	49
+    56                           	global	_RB2
+    57  0032                     _RB2	set	50
+    58                           	global	_RB3
+    59  0033                     _RB3	set	51
+    60                           	global	_TRISA
+    61  0085                     _TRISA	set	133
+    62                           	global	_TRISB
+    63  0086                     _TRISB	set	134
+    64                           	global	_C1INV
+    65  04E4                     _C1INV	set	1252
+    66                           	global	_C1OUT
+    67  04E6                     _C1OUT	set	1254
+    68                           	global	_C2INV
+    69  04E5                     _C2INV	set	1253
+    70                           	global	_CIS
+    71  04E3                     _CIS	set	1251
+    72                           	global	_CM0
+    73  04E0                     _CM0	set	1248
+    74                           	global	_CM1
+    75  04E1                     _CM1	set	1249
+    76                           	global	_CM2
+    77  04E2                     _CM2	set	1250
+    78                           	global	_CMIE
+    79  046E                     _CMIE	set	1134
+    80                           	global	_TRISB1
+    81  0431                     _TRISB1	set	1073
+    82                           	global	_TRISB2
+    83  0432                     _TRISB2	set	1074
+    84                           	global	_TRISB3
+    85  0433                     _TRISB3	set	1075
+    86                           	global	_EEADR
+    87  010D                     _EEADR	set	269
+    88                           	global	_EEDATA
+    89  010C                     _EEDATA	set	268
+    90                           	global	_EECON1
+    91  018C                     _EECON1	set	396
+    92                           	global	_EECON2
+    93  018D                     _EECON2	set	397
+    94                           	global	_RD
+    95  0C60                     _RD	set	3168
+    96                           	global	_WR
+    97  0C61                     _WR	set	3169
+    98                           	global	_WREN
+    99  0C62                     _WREN	set	3170
+   100                           	file	"comparador_analogico.as"
+   101                           	line	#
+   102                           psect cinit,class=CODE,delta=2
+   103                           global start_initialization
+   104  0704                     start_initialization:
+   105                           
+   106                           psect cinit,class=CODE,delta=2
+   107                           global end_of_initialization
+   108                           
+   109                           ;End of C runtime variable initialization code
+   110                           
+   111  0704                     end_of_initialization:
+   112  0704  0183               clrf status
+   113  0705  120A  118A  2F08   ljmp _main	;jump to C main() function
+   114                           psect	cstackCOMMON,class=COMMON,space=1
+   115                           global __pcstackCOMMON
+   116  0070                     __pcstackCOMMON:
+   117                           	global	?_main
+   118  0070                     ?_main:	; 0 bytes @ 0x0
+   119                           	global	??_main
+   120  0070                     ??_main:	; 0 bytes @ 0x0
+   121  0070                     	ds	3
+   122 ;;Data sizes: Strings 0, constant 0, data 0, bss 0, persistent 0 stack 0
+   123 ;;Auto spaces:   Size  Autos    Used
+   124 ;; COMMON          14      3       3
+   125 ;; BANK0           80      0       0
+   126 ;; BANK1           80      0       0
+   127 ;; BANK3           96      0       0
+   128 ;; BANK2           96      0       0
+   129                           
+   130 ;;
+   131 ;; Pointer list with targets:
+   132                           
+   133                           
+   134                           
+   135 ;;
+   136 ;; Critical Paths under _main in COMMON
+   137 ;;
+   138 ;;   None.
+   139 ;;
+   140 ;; Critical Paths under _main in BANK0
+   141 ;;
+   142 ;;   None.
+   143 ;;
+   144 ;; Critical Paths under _main in BANK1
+   145 ;;
+   146 ;;   None.
+   147 ;;
+   148 ;; Critical Paths under _main in BANK3
+   149 ;;
+   150 ;;   None.
+   151 ;;
+   152 ;; Critical Paths under _main in BANK2
+   153 ;;
+   154 ;;   None.
+   155                           
+   156 ;;
+   157 ;;Main: autosize = 0, tempsize = 3, incstack = 0, save=0
+   158 ;;
+   159                           
+   160 ;;
+   161 ;;Call Graph Tables:
+   162 ;;
+   163 ;; ---------------------------------------------------------------------------------
+   164 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   165 ;; ---------------------------------------------------------------------------------
+   166 ;; (0) _main                                                 3     3      0       0
+   167 ;;                                              0 COMMON     3     3      0
+   168 ;; ---------------------------------------------------------------------------------
+   169 ;; Estimated maximum stack depth 0
+   170 ;; ---------------------------------------------------------------------------------
+   171                           
+   172 ;; Call Graph Graphs:
+   173                           
+   174 ;; _main (ROOT)
+   175 ;;
+   176                           
+   177 ;; Address spaces:
+   178                           
+   179 ;;Name               Size   Autos  Total    Cost      Usage
+   180 ;;BITCOMMON            E      0       0       0        0.0%
+   181 ;;EEDATA             100      0       0       0        0.0%
+   182 ;;NULL                 0      0       0       0        0.0%
+   183 ;;CODE                 0      0       0       0        0.0%
+   184 ;;COMMON               E      3       3       1       21.4%
+   185 ;;BITSFR0              0      0       0       1        0.0%
+   186 ;;SFR0                 0      0       0       1        0.0%
+   187 ;;BITSFR1              0      0       0       2        0.0%
+   188 ;;SFR1                 0      0       0       2        0.0%
+   189 ;;STACK                0      0       0       2        0.0%
+   190 ;;ABS                  0      0       0       3        0.0%
+   191 ;;BITBANK0            50      0       0       4        0.0%
+   192 ;;BITSFR3              0      0       0       4        0.0%
+   193 ;;SFR3                 0      0       0       4        0.0%
+   194 ;;BANK0               50      0       0       5        0.0%
+   195 ;;BITSFR2              0      0       0       5        0.0%
+   196 ;;SFR2                 0      0       0       5        0.0%
+   197 ;;BITBANK1            50      0       0       6        0.0%
+   198 ;;BANK1               50      0       0       7        0.0%
+   199 ;;BITBANK3            60      0       0       8        0.0%
+   200 ;;BANK3               60      0       0       9        0.0%
+   201 ;;BITBANK2            60      0       0      10        0.0%
+   202 ;;BANK2               60      0       0      11        0.0%
+   203 ;;DATA                 0      0       0      12        0.0%
+   204                           
+   205                           	global	_main
+   206                           psect	maintext
+   207                           
+   208 ;; *************** function _main *****************
+   209 ;; Defined at:
+   210 ;;		line 15 in file "C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\comparador_analogic
+       o\comparador_analogico.c"
+   211 ;; Parameters:    Size  Location     Type
+   212 ;;		None
+   213 ;; Auto vars:     Size  Location     Type
+   214 ;;		None
+   215 ;; Return value:  Size  Location     Type
+   216 ;;		None               void
+   217 ;; Registers used:
+   218 ;;		wreg
+   219 ;; Tracked objects:
+   220 ;;		On entry : 17F/0
+   221 ;;		On exit  : 0/0
+   222 ;;		Unchanged: 0/0
+   223 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   224 ;;      Params:         0       0       0       0       0
+   225 ;;      Locals:         0       0       0       0       0
+   226 ;;      Temps:          3       0       0       0       0
+   227 ;;      Totals:         3       0       0       0       0
+   228 ;;Total ram usage:        3 bytes
+   229 ;; This function calls:
+   230 ;;		Nothing
+   231 ;; This function is called by:
+   232 ;;		Startup code after reset
+   233 ;; This function uses a non-reentrant model
+   234 ;;
+   235                           psect	maintext
+   236                           	file	"C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\c
+                                 omparador_analogico\comparador_analogico.c"
+   237                           	line	15
+   238                           	global	__size_of_main
+   239  00F8                     	__size_of_main	equ	__end_of_main-_main
+   240                           	
+   241  0708                     _main:	
+   242                           	opt	stack 8
+   243                           ; Regs used in _main: [wreg]
+   244                           	line	16
+   245                           	
+   246  0708                     l2597:	
+   247                           # 16 "C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\co
+                                 mparador_analogico\comparador_analogico.c"
+   248                           	psect config,class=CONFIG,delta=2 ;#
+   249                           # 16 "C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\co
+                                 mparador_analogico\comparador_analogico.c"
+   250  2007  FF3A               	dw 0xFFFF & 0xFFFB & 0xFFBF & 0xFFFF & 0xFFFE & 0xFFFF & 0xFF7F & 0xFFFF ;#
+   251                           psect	maintext
+   252                           	line	18
+   253                           	
+   254  0708                     l2599:	
+   255                           ;comparador_analogico.c: 18: TRISB = 0b11111111;
+   256  0708  30FF               	movlw	(0FFh)
+   257  0709  1683               	bsf	status, 5	;RP0=1, select bank1
+   258  070A  1303               	bcf	status, 6	;RP1=0, select bank1
+   259  070B  0086               	movwf	(134)^080h	;volatile
+   260                           	line	19
+   261                           	
+   262  070C                     l2601:	
+   263                           ;comparador_analogico.c: 19: TRISB1 = 0;
+   264  070C  1086               	bcf	(1073/8)^080h,(1073)&7
+   265                           	line	20
+   266                           	
+   267  070D                     l2603:	
+   268                           ;comparador_analogico.c: 20: TRISB2 = 0;
+   269  070D  1106               	bcf	(1074/8)^080h,(1074)&7
+   270                           	line	21
+   271                           	
+   272  070E                     l2605:	
+   273                           ;comparador_analogico.c: 21: TRISB3 = 0;
+   274  070E  1186               	bcf	(1075/8)^080h,(1075)&7
+   275                           	line	23
+   276                           ;comparador_analogico.c: 23: TRISA = 0b001111;
+   277  070F  300F               	movlw	(0Fh)
+   278  0710  0085               	movwf	(133)^080h	;volatile
+   279                           	line	28
+   280                           	
+   281  0711                     l2607:	
+   282                           ;comparador_analogico.c: 28: C2INV = 0;
+   283  0711  129C               	bcf	(1253/8)^080h,(1253)&7
+   284                           	line	29
+   285                           	
+   286  0712                     l2609:	
+   287                           ;comparador_analogico.c: 29: C1INV = 0;
+   288  0712  121C               	bcf	(1252/8)^080h,(1252)&7
+   289                           	line	30
+   290                           	
+   291  0713                     l2611:	
+   292                           ;comparador_analogico.c: 30: CIS = 0;
+   293  0713  119C               	bcf	(1251/8)^080h,(1251)&7
+   294                           	line	31
+   295                           	
+   296  0714                     l2613:	
+   297                           ;comparador_analogico.c: 31: CM2 = 0;
+   298  0714  111C               	bcf	(1250/8)^080h,(1250)&7
+   299                           	line	32
+   300                           	
+   301  0715                     l2615:	
+   302                           ;comparador_analogico.c: 32: CM1 = 1;
+   303  0715  149C               	bsf	(1249/8)^080h,(1249)&7
+   304                           	line	33
+   305                           	
+   306  0716                     l2617:	
+   307                           ;comparador_analogico.c: 33: CM0 = 0;
+   308  0716  101C               	bcf	(1248/8)^080h,(1248)&7
+   309                           	line	35
+   310                           	
+   311  0717                     l2619:	
+   312                           ;comparador_analogico.c: 35: CMIF = 0;
+   313  0717  1283               	bcf	status, 5	;RP0=0, select bank0
+   314  0718  1303               	bcf	status, 6	;RP1=0, select bank0
+   315  0719  130D               	bcf	(110/8),(110)&7
+   316                           	line	36
+   317                           	
+   318  071A                     l2621:	
+   319                           ;comparador_analogico.c: 36: CMIE = 0;
+   320  071A  1683               	bsf	status, 5	;RP0=1, select bank1
+   321  071B  1303               	bcf	status, 6	;RP1=0, select bank1
+   322  071C  130D               	bcf	(1134/8)^080h,(1134)&7
+   323                           	line	37
+   324                           	
+   325  071D                     l2623:	
+   326                           ;comparador_analogico.c: 37: PEIE = 0;
+   327  071D  130B               	bcf	(94/8),(94)&7
+   328                           	line	38
+   329                           	
+   330  071E                     l2625:	
+   331                           ;comparador_analogico.c: 38: GIE = 0;
+   332  071E  138B               	bcf	(95/8),(95)&7
+   333                           	line	41
+   334                           	
+   335  071F                     l2627:	
+   336                           ;comparador_analogico.c: 41: RB1 = 1;
+   337  071F  1283               	bcf	status, 5	;RP0=0, select bank0
+   338  0720  1303               	bcf	status, 6	;RP1=0, select bank0
+   339  0721  1486               	bsf	(49/8),(49)&7
+   340                           	line	42
+   341                           ;comparador_analogico.c: 42: _delay((unsigned long)((500)*(20000000/4000.0)));
+   342                           	opt asmopt_off
+   343  0722  300D               movlw  13
+   344  0723  00F2               movwf	((??_main+0)+0+2),f
+   345  0724  30AF               movlw	175
+   346  0725  00F1               movwf	((??_main+0)+0+1),f
+   347  0726  30C1               	movlw	193
+   348  0727  00F0               movwf	((??_main+0)+0),f
+   349  0728                     u2237:
+   350  0728  0BF0               	decfsz	((??_main+0)+0),f
+   351  0729  2F28               	goto	u2237
+   352  072A  0BF1               	decfsz	((??_main+0)+0+1),f
+   353  072B  2F28               	goto	u2237
+   354  072C  0BF2               	decfsz	((??_main+0)+0+2),f
+   355  072D  2F28               	goto	u2237
+   356  072E  0064               	clrwdt
+   357                           opt asmopt_on
+   358                           
+   359                           	line	43
+   360                           	
+   361  072F                     l2629:	
+   362                           ;comparador_analogico.c: 43: RB1 = 0;
+   363  072F  1283               	bcf	status, 5	;RP0=0, select bank0
+   364  0730  1303               	bcf	status, 6	;RP1=0, select bank0
+   365  0731  1086               	bcf	(49/8),(49)&7
+   366                           	line	44
+   367                           ;comparador_analogico.c: 44: _delay((unsigned long)((500)*(20000000/4000.0)));
+   368                           	opt asmopt_off
+   369  0732  300D               movlw  13
+   370  0733  00F2               movwf	((??_main+0)+0+2),f
+   371  0734  30AF               movlw	175
+   372  0735  00F1               movwf	((??_main+0)+0+1),f
+   373  0736  30C1               	movlw	193
+   374  0737  00F0               movwf	((??_main+0)+0),f
+   375  0738                     u2247:
+   376  0738  0BF0               	decfsz	((??_main+0)+0),f
+   377  0739  2F38               	goto	u2247
+   378  073A  0BF1               	decfsz	((??_main+0)+0+1),f
+   379  073B  2F38               	goto	u2247
+   380  073C  0BF2               	decfsz	((??_main+0)+0+2),f
+   381  073D  2F38               	goto	u2247
+   382  073E  0064               	clrwdt
+   383                           opt asmopt_on
+   384                           
+   385                           	line	45
+   386                           	
+   387  073F                     l2631:	
+   388                           ;comparador_analogico.c: 45: RB1 = 1;
+   389  073F  1283               	bcf	status, 5	;RP0=0, select bank0
+   390  0740  1303               	bcf	status, 6	;RP1=0, select bank0
+   391  0741  1486               	bsf	(49/8),(49)&7
+   392                           	line	46
+   393                           ;comparador_analogico.c: 46: _delay((unsigned long)((500)*(20000000/4000.0)));
+   394                           	opt asmopt_off
+   395  0742  300D               movlw  13
+   396  0743  00F2               movwf	((??_main+0)+0+2),f
+   397  0744  30AF               movlw	175
+   398  0745  00F1               movwf	((??_main+0)+0+1),f
+   399  0746  30C1               	movlw	193
+   400  0747  00F0               movwf	((??_main+0)+0),f
+   401  0748                     u2257:
+   402  0748  0BF0               	decfsz	((??_main+0)+0),f
+   403  0749  2F48               	goto	u2257
+   404  074A  0BF1               	decfsz	((??_main+0)+0+1),f
+   405  074B  2F48               	goto	u2257
+   406  074C  0BF2               	decfsz	((??_main+0)+0+2),f
+   407  074D  2F48               	goto	u2257
+   408  074E  0064               	clrwdt
+   409                           opt asmopt_on
+   410                           
+   411                           	line	47
+   412                           	
+   413  074F                     l2633:	
+   414                           ;comparador_analogico.c: 47: RB1 = 0;
+   415  074F  1283               	bcf	status, 5	;RP0=0, select bank0
+   416  0750  1303               	bcf	status, 6	;RP1=0, select bank0
+   417  0751  1086               	bcf	(49/8),(49)&7
+   418                           	line	48
+   419                           ;comparador_analogico.c: 48: _delay((unsigned long)((500)*(20000000/4000.0)));
+   420                           	opt asmopt_off
+   421  0752  300D               movlw  13
+   422  0753  00F2               movwf	((??_main+0)+0+2),f
+   423  0754  30AF               movlw	175
+   424  0755  00F1               movwf	((??_main+0)+0+1),f
+   425  0756  30C1               	movlw	193
+   426  0757  00F0               movwf	((??_main+0)+0),f
+   427  0758                     u2267:
+   428  0758  0BF0               	decfsz	((??_main+0)+0),f
+   429  0759  2F58               	goto	u2267
+   430  075A  0BF1               	decfsz	((??_main+0)+0+1),f
+   431  075B  2F58               	goto	u2267
+   432  075C  0BF2               	decfsz	((??_main+0)+0+2),f
+   433  075D  2F58               	goto	u2267
+   434  075E  0064               	clrwdt
+   435                           opt asmopt_on
+   436                           
+   437                           	line	50
+   438                           	
+   439  075F                     l2635:	
+   440                           ;comparador_analogico.c: 50: RB2 = 1;
+   441  075F  1283               	bcf	status, 5	;RP0=0, select bank0
+   442  0760  1303               	bcf	status, 6	;RP1=0, select bank0
+   443  0761  1506               	bsf	(50/8),(50)&7
+   444                           	line	51
+   445                           ;comparador_analogico.c: 51: _delay((unsigned long)((500)*(20000000/4000.0)));
+   446                           	opt asmopt_off
+   447  0762  300D               movlw  13
+   448  0763  00F2               movwf	((??_main+0)+0+2),f
+   449  0764  30AF               movlw	175
+   450  0765  00F1               movwf	((??_main+0)+0+1),f
+   451  0766  30C1               	movlw	193
+   452  0767  00F0               movwf	((??_main+0)+0),f
+   453  0768                     u2277:
+   454  0768  0BF0               	decfsz	((??_main+0)+0),f
+   455  0769  2F68               	goto	u2277
+   456  076A  0BF1               	decfsz	((??_main+0)+0+1),f
+   457  076B  2F68               	goto	u2277
+   458  076C  0BF2               	decfsz	((??_main+0)+0+2),f
+   459  076D  2F68               	goto	u2277
+   460  076E  0064               	clrwdt
+   461                           opt asmopt_on
+   462                           
+   463                           	line	52
+   464                           	
+   465  076F                     l2637:	
+   466                           ;comparador_analogico.c: 52: RB2 = 0;
+   467  076F  1283               	bcf	status, 5	;RP0=0, select bank0
+   468  0770  1303               	bcf	status, 6	;RP1=0, select bank0
+   469  0771  1106               	bcf	(50/8),(50)&7
+   470                           	line	53
+   471                           ;comparador_analogico.c: 53: _delay((unsigned long)((500)*(20000000/4000.0)));
+   472                           	opt asmopt_off
+   473  0772  300D               movlw  13
+   474  0773  00F2               movwf	((??_main+0)+0+2),f
+   475  0774  30AF               movlw	175
+   476  0775  00F1               movwf	((??_main+0)+0+1),f
+   477  0776  30C1               	movlw	193
+   478  0777  00F0               movwf	((??_main+0)+0),f
+   479  0778                     u2287:
+   480  0778  0BF0               	decfsz	((??_main+0)+0),f
+   481  0779  2F78               	goto	u2287
+   482  077A  0BF1               	decfsz	((??_main+0)+0+1),f
+   483  077B  2F78               	goto	u2287
+   484  077C  0BF2               	decfsz	((??_main+0)+0+2),f
+   485  077D  2F78               	goto	u2287
+   486  077E  0064               	clrwdt
+   487                           opt asmopt_on
+   488                           
+   489                           	line	54
+   490                           	
+   491  077F                     l2639:	
+   492                           ;comparador_analogico.c: 54: RB2 = 1;
+   493  077F  1283               	bcf	status, 5	;RP0=0, select bank0
+   494  0780  1303               	bcf	status, 6	;RP1=0, select bank0
+   495  0781  1506               	bsf	(50/8),(50)&7
+   496                           	line	55
+   497                           ;comparador_analogico.c: 55: _delay((unsigned long)((500)*(20000000/4000.0)));
+   498                           	opt asmopt_off
+   499  0782  300D               movlw  13
+   500  0783  00F2               movwf	((??_main+0)+0+2),f
+   501  0784  30AF               movlw	175
+   502  0785  00F1               movwf	((??_main+0)+0+1),f
+   503  0786  30C1               	movlw	193
+   504  0787  00F0               movwf	((??_main+0)+0),f
+   505  0788                     u2297:
+   506  0788  0BF0               	decfsz	((??_main+0)+0),f
+   507  0789  2F88               	goto	u2297
+   508  078A  0BF1               	decfsz	((??_main+0)+0+1),f
+   509  078B  2F88               	goto	u2297
+   510  078C  0BF2               	decfsz	((??_main+0)+0+2),f
+   511  078D  2F88               	goto	u2297
+   512  078E  0064               	clrwdt
+   513                           opt asmopt_on
+   514                           
+   515                           	line	56
+   516                           	
+   517  078F                     l2641:	
+   518                           ;comparador_analogico.c: 56: RB2 = 0;
+   519  078F  1283               	bcf	status, 5	;RP0=0, select bank0
+   520  0790  1303               	bcf	status, 6	;RP1=0, select bank0
+   521  0791  1106               	bcf	(50/8),(50)&7
+   522                           	line	57
+   523                           ;comparador_analogico.c: 57: _delay((unsigned long)((500)*(20000000/4000.0)));
+   524                           	opt asmopt_off
+   525  0792  300D               movlw  13
+   526  0793  00F2               movwf	((??_main+0)+0+2),f
+   527  0794  30AF               movlw	175
+   528  0795  00F1               movwf	((??_main+0)+0+1),f
+   529  0796  30C1               	movlw	193
+   530  0797  00F0               movwf	((??_main+0)+0),f
+   531  0798                     u2307:
+   532  0798  0BF0               	decfsz	((??_main+0)+0),f
+   533  0799  2F98               	goto	u2307
+   534  079A  0BF1               	decfsz	((??_main+0)+0+1),f
+   535  079B  2F98               	goto	u2307
+   536  079C  0BF2               	decfsz	((??_main+0)+0+2),f
+   537  079D  2F98               	goto	u2307
+   538  079E  0064               	clrwdt
+   539                           opt asmopt_on
+   540                           
+   541                           	line	60
+   542                           	
+   543  079F                     l2643:	
+   544                           ;comparador_analogico.c: 60: RB3 = 1;
+   545  079F  1283               	bcf	status, 5	;RP0=0, select bank0
+   546  07A0  1303               	bcf	status, 6	;RP1=0, select bank0
+   547  07A1  1586               	bsf	(51/8),(51)&7
+   548                           	line	61
+   549                           ;comparador_analogico.c: 61: _delay((unsigned long)((500)*(20000000/4000.0)));
+   550                           	opt asmopt_off
+   551  07A2  300D               movlw  13
+   552  07A3  00F2               movwf	((??_main+0)+0+2),f
+   553  07A4  30AF               movlw	175
+   554  07A5  00F1               movwf	((??_main+0)+0+1),f
+   555  07A6  30C1               	movlw	193
+   556  07A7  00F0               movwf	((??_main+0)+0),f
+   557  07A8                     u2317:
+   558  07A8  0BF0               	decfsz	((??_main+0)+0),f
+   559  07A9  2FA8               	goto	u2317
+   560  07AA  0BF1               	decfsz	((??_main+0)+0+1),f
+   561  07AB  2FA8               	goto	u2317
+   562  07AC  0BF2               	decfsz	((??_main+0)+0+2),f
+   563  07AD  2FA8               	goto	u2317
+   564  07AE  0064               	clrwdt
+   565                           opt asmopt_on
+   566                           
+   567                           	line	62
+   568                           	
+   569  07AF                     l2645:	
+   570                           ;comparador_analogico.c: 62: RB3 = 0;
+   571  07AF  1283               	bcf	status, 5	;RP0=0, select bank0
+   572  07B0  1303               	bcf	status, 6	;RP1=0, select bank0
+   573  07B1  1186               	bcf	(51/8),(51)&7
+   574                           	line	63
+   575                           ;comparador_analogico.c: 63: _delay((unsigned long)((500)*(20000000/4000.0)));
+   576                           	opt asmopt_off
+   577  07B2  300D               movlw  13
+   578  07B3  00F2               movwf	((??_main+0)+0+2),f
+   579  07B4  30AF               movlw	175
+   580  07B5  00F1               movwf	((??_main+0)+0+1),f
+   581  07B6  30C1               	movlw	193
+   582  07B7  00F0               movwf	((??_main+0)+0),f
+   583  07B8                     u2327:
+   584  07B8  0BF0               	decfsz	((??_main+0)+0),f
+   585  07B9  2FB8               	goto	u2327
+   586  07BA  0BF1               	decfsz	((??_main+0)+0+1),f
+   587  07BB  2FB8               	goto	u2327
+   588  07BC  0BF2               	decfsz	((??_main+0)+0+2),f
+   589  07BD  2FB8               	goto	u2327
+   590  07BE  0064               	clrwdt
+   591                           opt asmopt_on
+   592                           
+   593                           	line	64
+   594                           	
+   595  07BF                     l2647:	
+   596                           ;comparador_analogico.c: 64: RB3 = 1;
+   597  07BF  1283               	bcf	status, 5	;RP0=0, select bank0
+   598  07C0  1303               	bcf	status, 6	;RP1=0, select bank0
+   599  07C1  1586               	bsf	(51/8),(51)&7
+   600                           	line	65
+   601                           ;comparador_analogico.c: 65: _delay((unsigned long)((500)*(20000000/4000.0)));
+   602                           	opt asmopt_off
+   603  07C2  300D               movlw  13
+   604  07C3  00F2               movwf	((??_main+0)+0+2),f
+   605  07C4  30AF               movlw	175
+   606  07C5  00F1               movwf	((??_main+0)+0+1),f
+   607  07C6  30C1               	movlw	193
+   608  07C7  00F0               movwf	((??_main+0)+0),f
+   609  07C8                     u2337:
+   610  07C8  0BF0               	decfsz	((??_main+0)+0),f
+   611  07C9  2FC8               	goto	u2337
+   612  07CA  0BF1               	decfsz	((??_main+0)+0+1),f
+   613  07CB  2FC8               	goto	u2337
+   614  07CC  0BF2               	decfsz	((??_main+0)+0+2),f
+   615  07CD  2FC8               	goto	u2337
+   616  07CE  0064               	clrwdt
+   617                           opt asmopt_on
+   618                           
+   619  07CF  2FD0               	goto	l2649
+   620                           	line	70
+   621                           ;comparador_analogico.c: 70: while(1)
+   622                           	
+   623  07D0                     l687:	
+   624                           	line	73
+   625                           	
+   626  07D0                     l2649:	
+   627                           ;comparador_analogico.c: 71: {
+   628                           ;comparador_analogico.c: 73: if(C1OUT)
+   629  07D0  1683               	bsf	status, 5	;RP0=1, select bank1
+   630  07D1  1303               	bcf	status, 6	;RP1=0, select bank1
+   631  07D2  1F1C               	btfss	(1254/8)^080h,(1254)&7
+   632  07D3  2FD5               	goto	u2221
+   633  07D4  2FD6               	goto	u2220
+   634  07D5                     u2221:
+   635  07D5  2FDA               	goto	l688
+   636  07D6                     u2220:
+   637                           	line	75
+   638                           	
+   639  07D6                     l2651:	
+   640                           ;comparador_analogico.c: 74: {
+   641                           ;comparador_analogico.c: 75: RB2 = 1;
+   642  07D6  1283               	bcf	status, 5	;RP0=0, select bank0
+   643  07D7  1303               	bcf	status, 6	;RP1=0, select bank0
+   644  07D8  1506               	bsf	(50/8),(50)&7
+   645                           	line	76
+   646                           ;comparador_analogico.c: 76: }else
+   647  07D9  2FDD               	goto	l689
+   648                           	
+   649  07DA                     l688:	
+   650                           	line	78
+   651                           ;comparador_analogico.c: 77: {
+   652                           ;comparador_analogico.c: 78: RB2 = 0;
+   653  07DA  1283               	bcf	status, 5	;RP0=0, select bank0
+   654  07DB  1303               	bcf	status, 6	;RP1=0, select bank0
+   655  07DC  1106               	bcf	(50/8),(50)&7
+   656                           	line	79
+   657                           	
+   658  07DD                     l689:	
+   659                           	line	81
+   660                           ;comparador_analogico.c: 79: }
+   661                           ;comparador_analogico.c: 81: RB1 = 1;
+   662  07DD  1486               	bsf	(49/8),(49)&7
+   663                           	line	82
+   664                           	
+   665  07DE                     l2653:	
+   666                           ;comparador_analogico.c: 82: _delay((unsigned long)((200)*(20000000/4000.0)));
+   667                           	opt asmopt_off
+   668  07DE  3006               movlw  6
+   669  07DF  00F2               movwf	((??_main+0)+0+2),f
+   670  07E0  3013               movlw	19
+   671  07E1  00F1               movwf	((??_main+0)+0+1),f
+   672  07E2  30B1               	movlw	177
+   673  07E3  00F0               movwf	((??_main+0)+0),f
+   674  07E4                     u2347:
+   675  07E4  0BF0               	decfsz	((??_main+0)+0),f
+   676  07E5  2FE4               	goto	u2347
+   677  07E6  0BF1               	decfsz	((??_main+0)+0+1),f
+   678  07E7  2FE4               	goto	u2347
+   679  07E8  0BF2               	decfsz	((??_main+0)+0+2),f
+   680  07E9  2FE4               	goto	u2347
+   681  07EA  2FEB               	nop2
+   682                           opt asmopt_on
+   683                           
+   684                           	line	83
+   685                           	
+   686  07EB                     l2655:	
+   687                           ;comparador_analogico.c: 83: RB1 = 0;
+   688  07EB  1283               	bcf	status, 5	;RP0=0, select bank0
+   689  07EC  1303               	bcf	status, 6	;RP1=0, select bank0
+   690  07ED  1086               	bcf	(49/8),(49)&7
+   691                           	line	84
+   692                           ;comparador_analogico.c: 84: _delay((unsigned long)((200)*(20000000/4000.0)));
+   693                           	opt asmopt_off
+   694  07EE  3006               movlw  6
+   695  07EF  00F2               movwf	((??_main+0)+0+2),f
+   696  07F0  3013               movlw	19
+   697  07F1  00F1               movwf	((??_main+0)+0+1),f
+   698  07F2  30B1               	movlw	177
+   699  07F3  00F0               movwf	((??_main+0)+0),f
+   700  07F4                     u2357:
+   701  07F4  0BF0               	decfsz	((??_main+0)+0),f
+   702  07F5  2FF4               	goto	u2357
+   703  07F6  0BF1               	decfsz	((??_main+0)+0+1),f
+   704  07F7  2FF4               	goto	u2357
+   705  07F8  0BF2               	decfsz	((??_main+0)+0+2),f
+   706  07F9  2FF4               	goto	u2357
+   707  07FA  2FFB               	nop2
+   708                           opt asmopt_on
+   709                           
+   710  07FB  2FD0               	goto	l2649
+   711                           	line	86
+   712                           	
+   713  07FC                     l690:	
+   714                           	line	70
+   715  07FC  2FD0               	goto	l2649
+   716                           	
+   717  07FD                     l691:	
+   718                           	line	88
+   719                           	
+   720  07FD                     l692:	
+   721                           	global	start
+   722  07FD  120A  118A  2800   	ljmp	start
+   723                           	opt stack 0
+   724                           GLOBAL	__end_of_main
+   725  0800                     	__end_of_main:
+   726 ;; =============== function _main ends ============
+   727                           
+   728                           	signat	_main,88
+   729                           psect	maintext
+   730                           	global	btemp
+   731  007E                     	btemp set 07Eh
+   732                           
+   733                           	DABS	1,126,2	;btemp
+   734                           	global	wtemp0
+   735  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.83 build 10920 
+Symbol Table                                                                                   Wed Oct 23 19:47:51 2013
+
+                  _RD 0C60                    _WR 0C61                   _CM0 04E0                   _CM1 04E1  
+                 _CM2 04E2                   l690 07FC                   l691 07FD                   l692 07FD  
+                 l687 07D0                   l688 07DA                   l689 07DD                   _CIS 04E3  
+                 _GIE 005F                   _RB1 0031                   _RB2 0032                   _RB3 0033  
+                l2601 070C                  l2611 0713                  l2603 070D                  l2621 071A  
+                l2613 0714                  l2605 070E                  l2631 073F                  l2623 071D  
+                l2615 0715                  l2607 0711                  l2641 078F                  l2633 074F  
+                l2625 071E                  l2617 0716                  l2609 0712                  l2651 07D6  
+                l2643 079F                  l2635 075F                  l2627 071F                  l2619 0717  
+                l2653 07DE                  l2645 07AF                  l2637 076F                  l2629 072F  
+                l2655 07EB                  l2647 07BF                  l2639 077F                  l2649 07D0  
+                l2597 0708                  l2599 0708                  _CMIE 046E                  _CMIF 006E  
+                u2220 07D6                  u2221 07D5                  u2307 0798                  u2317 07A8  
+                u2237 0728                  u2327 07B8                  u2247 0738                  u2337 07C8  
+                u2257 0748                  u2347 07E4                  u2267 0758                  u2357 07F4  
+                u2277 0768                  u2287 0778                  u2297 0788                  _PEIE 005E  
+                _WREN 0C62                  _main 0708                  btemp 007E                  start 0000  
+               _C1INV 04E4                 _C2INV 04E5                 _C1OUT 04E6                 ?_main 0070  
+               _EEADR 010D                 _CARRY 0018                 _TRISA 0085                 _TRISB 0086  
+               status 0003                 wtemp0 007E          __end_of_main 0800                ??_main 0070  
+              _EEDATA 010C                _EECON1 018C                _EECON2 018D                _TRISB1 0431  
+              _TRISB2 0432                _TRISB3 0433        __pcstackCOMMON 0070            __pmaintext 0708  
+end_of_initialization 0704   start_initialization 0704         __size_of_main 00F8  

@@ -1,0 +1,826 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.83 build 10920 
+                                                                                               Fri Oct 04 18:49:07 2013
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 10920"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F877A
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNROOT	_main
+    43                           	FNCALL	intlevel1,_interupt
+    44                           	global	intlevel1
+    45                           	FNROOT	intlevel1
+    46                           	global	_data
+    47                           	global	_ADRESH
+    48                           psect	maintext,global,class=CODE,delta=2
+    49                           global __pmaintext
+    50  0015                     __pmaintext:
+    51  001E                     _ADRESH	set	30
+    52                           	global	_ADCS0
+    53  00FE                     _ADCS0	set	254
+    54                           	global	_ADCS1
+    55  00FF                     _ADCS1	set	255
+    56                           	global	_ADIF
+    57  0066                     _ADIF	set	102
+    58                           	global	_ADON
+    59  00F8                     _ADON	set	248
+    60                           	global	_CARRY
+    61  0018                     _CARRY	set	24
+    62                           	global	_CHS0
+    63  00FB                     _CHS0	set	251
+    64                           	global	_CHS1
+    65  00FC                     _CHS1	set	252
+    66                           	global	_CHS2
+    67  00FD                     _CHS2	set	253
+    68                           	global	_GIE
+    69  005F                     _GIE	set	95
+    70                           	global	_GO_DONE
+    71  00FA                     _GO_DONE	set	250
+    72                           	global	_INTE
+    73  005C                     _INTE	set	92
+    74                           	global	_INTF
+    75  0059                     _INTF	set	89
+    76                           	global	_PEIE
+    77  005E                     _PEIE	set	94
+    78                           	global	_RB1
+    79  0031                     _RB1	set	49
+    80                           	global	_RB2
+    81  0032                     _RB2	set	50
+    82                           	global	_RB3
+    83  0033                     _RB3	set	51
+    84                           	global	_TRISB
+    85  0086                     _TRISB	set	134
+    86                           	global	_ADCS2
+    87  04FE                     _ADCS2	set	1278
+    88                           	global	_ADFM
+    89  04FF                     _ADFM	set	1279
+    90                           	global	_ADIE
+    91  0466                     _ADIE	set	1126
+    92                           	global	_INTEDG
+    93  040E                     _INTEDG	set	1038
+    94                           	global	_PCFG0
+    95  04F8                     _PCFG0	set	1272
+    96                           	global	_PCFG1
+    97  04F9                     _PCFG1	set	1273
+    98                           	global	_PCFG2
+    99  04FA                     _PCFG2	set	1274
+   100                           	global	_PCFG3
+   101  04FB                     _PCFG3	set	1275
+   102                           	global	_TRISA0
+   103  0428                     _TRISA0	set	1064
+   104                           	global	_TRISB1
+   105  0431                     _TRISB1	set	1073
+   106                           	global	_TRISB2
+   107  0432                     _TRISB2	set	1074
+   108                           	global	_TRISB3
+   109  0433                     _TRISB3	set	1075
+   110                           	global	_EEADR
+   111  010D                     _EEADR	set	269
+   112                           	global	_EEDATA
+   113  010C                     _EEDATA	set	268
+   114                           	global	_EECON1
+   115  018C                     _EECON1	set	396
+   116                           	global	_EECON2
+   117  018D                     _EECON2	set	397
+   118                           	global	_RD
+   119  0C60                     _RD	set	3168
+   120                           	global	_WR
+   121  0C61                     _WR	set	3169
+   122                           	global	_WREN
+   123  0C62                     _WREN	set	3170
+   124                           	file	"adc_simples_int_button.as"
+   125                           	line	#
+   126                           psect cinit,class=CODE,delta=2
+   127                           global start_initialization
+   128  00B5                     start_initialization:
+   129                           
+   130                           psect	bssCOMMON,class=COMMON,space=1
+   131                           global __pbssCOMMON
+   132  0078                     __pbssCOMMON:
+   133  0078                     _data:
+   134  0078                            ds      1
+   135                           
+   136                           ; Clear objects allocated to COMMON
+   137                           psect cinit,class=CODE,delta=2
+   138  00B5  01F8               	clrf	((__pbssCOMMON)+0)&07Fh
+   139                           psect cinit,class=CODE,delta=2
+   140                           global end_of_initialization
+   141                           
+   142                           ;End of C runtime variable initialization code
+   143                           
+   144  00B6                     end_of_initialization:
+   145  00B6  0183               clrf status
+   146  00B7  120A  118A  2815   ljmp _main	;jump to C main() function
+   147                           psect	cstackCOMMON,class=COMMON,space=1
+   148                           global __pcstackCOMMON
+   149  0070                     __pcstackCOMMON:
+   150                           	global	?_interupt
+   151  0070                     ?_interupt:	; 0 bytes @ 0x0
+   152                           	global	??_interupt
+   153  0070                     ??_interupt:	; 0 bytes @ 0x0
+   154                           	global	?_main
+   155  0070                     ?_main:	; 0 bytes @ 0x0
+   156  0070                     	ds	5
+   157                           	global	??_main
+   158  0075                     ??_main:	; 0 bytes @ 0x5
+   159  0075                     	ds	3
+   160 ;;Data sizes: Strings 0, constant 0, data 0, bss 1, persistent 0 stack 0
+   161 ;;Auto spaces:   Size  Autos    Used
+   162 ;; COMMON          14      8       9
+   163 ;; BANK0           80      0       0
+   164 ;; BANK1           80      0       0
+   165 ;; BANK3           96      0       0
+   166 ;; BANK2           96      0       0
+   167                           
+   168 ;;
+   169 ;; Pointer list with targets:
+   170                           
+   171                           
+   172                           
+   173 ;;
+   174 ;; Critical Paths under _main in COMMON
+   175 ;;
+   176 ;;   None.
+   177 ;;
+   178 ;; Critical Paths under _interupt in COMMON
+   179 ;;
+   180 ;;   None.
+   181 ;;
+   182 ;; Critical Paths under _main in BANK0
+   183 ;;
+   184 ;;   None.
+   185 ;;
+   186 ;; Critical Paths under _interupt in BANK0
+   187 ;;
+   188 ;;   None.
+   189 ;;
+   190 ;; Critical Paths under _main in BANK1
+   191 ;;
+   192 ;;   None.
+   193 ;;
+   194 ;; Critical Paths under _interupt in BANK1
+   195 ;;
+   196 ;;   None.
+   197 ;;
+   198 ;; Critical Paths under _main in BANK3
+   199 ;;
+   200 ;;   None.
+   201 ;;
+   202 ;; Critical Paths under _interupt in BANK3
+   203 ;;
+   204 ;;   None.
+   205 ;;
+   206 ;; Critical Paths under _main in BANK2
+   207 ;;
+   208 ;;   None.
+   209 ;;
+   210 ;; Critical Paths under _interupt in BANK2
+   211 ;;
+   212 ;;   None.
+   213                           
+   214 ;;
+   215 ;;Main: autosize = 0, tempsize = 3, incstack = 0, save=0
+   216 ;;
+   217                           
+   218 ;;
+   219 ;;Call Graph Tables:
+   220 ;;
+   221 ;; ---------------------------------------------------------------------------------
+   222 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   223 ;; ---------------------------------------------------------------------------------
+   224 ;; (0) _main                                                 3     3      0       0
+   225 ;;                                              5 COMMON     3     3      0
+   226 ;; ---------------------------------------------------------------------------------
+   227 ;; Estimated maximum stack depth 0
+   228 ;; ---------------------------------------------------------------------------------
+   229 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   230 ;; ---------------------------------------------------------------------------------
+   231 ;; (1) _interupt                                             5     5      0       0
+   232 ;;                                              0 COMMON     5     5      0
+   233 ;; ---------------------------------------------------------------------------------
+   234 ;; Estimated maximum stack depth 1
+   235 ;; ---------------------------------------------------------------------------------
+   236                           
+   237 ;; Call Graph Graphs:
+   238                           
+   239 ;; _main (ROOT)
+   240 ;;
+   241 ;; _interupt (ROOT)
+   242 ;;
+   243                           
+   244 ;; Address spaces:
+   245                           
+   246 ;;Name               Size   Autos  Total    Cost      Usage
+   247 ;;BITCOMMON            E      0       0       0        0.0%
+   248 ;;EEDATA             100      0       0       0        0.0%
+   249 ;;NULL                 0      0       0       0        0.0%
+   250 ;;CODE                 0      0       0       0        0.0%
+   251 ;;COMMON               E      8       9       1       64.3%
+   252 ;;BITSFR0              0      0       0       1        0.0%
+   253 ;;SFR0                 0      0       0       1        0.0%
+   254 ;;BITSFR1              0      0       0       2        0.0%
+   255 ;;SFR1                 0      0       0       2        0.0%
+   256 ;;STACK                0      0       0       2        0.0%
+   257 ;;ABS                  0      0       9       3        0.0%
+   258 ;;BITBANK0            50      0       0       4        0.0%
+   259 ;;BITSFR3              0      0       0       4        0.0%
+   260 ;;SFR3                 0      0       0       4        0.0%
+   261 ;;BANK0               50      0       0       5        0.0%
+   262 ;;BITSFR2              0      0       0       5        0.0%
+   263 ;;SFR2                 0      0       0       5        0.0%
+   264 ;;BITBANK1            50      0       0       6        0.0%
+   265 ;;BANK1               50      0       0       7        0.0%
+   266 ;;BITBANK3            60      0       0       8        0.0%
+   267 ;;BANK3               60      0       0       9        0.0%
+   268 ;;BITBANK2            60      0       0      10        0.0%
+   269 ;;BANK2               60      0       0      11        0.0%
+   270 ;;DATA                 0      0       9      12        0.0%
+   271                           
+   272                           	global	_main
+   273                           psect	maintext
+   274                           
+   275 ;; *************** function _main *****************
+   276 ;; Defined at:
+   277 ;;		line 41 in file "C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\adc_simples_int_but
+       ton\adc_simples_int_button.c"
+   278 ;; Parameters:    Size  Location     Type
+   279 ;;		None
+   280 ;; Auto vars:     Size  Location     Type
+   281 ;;		None
+   282 ;; Return value:  Size  Location     Type
+   283 ;;		None               void
+   284 ;; Registers used:
+   285 ;;		wreg
+   286 ;; Tracked objects:
+   287 ;;		On entry : 17F/0
+   288 ;;		On exit  : 0/0
+   289 ;;		Unchanged: 0/0
+   290 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   291 ;;      Params:         0       0       0       0       0
+   292 ;;      Locals:         0       0       0       0       0
+   293 ;;      Temps:          3       0       0       0       0
+   294 ;;      Totals:         3       0       0       0       0
+   295 ;;Total ram usage:        3 bytes
+   296 ;; Hardware stack levels required when called:    1
+   297 ;; This function calls:
+   298 ;;		Nothing
+   299 ;; This function is called by:
+   300 ;;		Startup code after reset
+   301 ;; This function uses a non-reentrant model
+   302 ;;
+   303                           psect	maintext
+   304                           	file	"C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\a
+                                 dc_simples_int_button\adc_simples_int_button.c"
+   305                           	line	41
+   306                           	global	__size_of_main
+   307  0085                     	__size_of_main	equ	__end_of_main-_main
+   308                           	
+   309  0015                     _main:	
+   310                           	opt	stack 7
+   311                           ; Regs used in _main: [wreg]
+   312                           	line	42
+   313                           	
+   314  0015                     l2616:	
+   315                           # 42 "C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\ad
+                                 c_simples_int_button\adc_simples_int_button.c"
+   316                           	psect config,class=CONFIG,delta=2 ;#
+   317                           # 42 "C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\ad
+                                 c_simples_int_button\adc_simples_int_button.c"
+   318  2007  FF3A               	dw 0xFFFF & 0xFFFB & 0xFFBF & 0xFFFF & 0xFFFE & 0xFFFF & 0xFF7F & 0xFFFF ;#
+   319                           psect	maintext
+   320                           	line	44
+   321                           ;adc_simples_int_button.c: 44: TRISA0 = 1;
+   322  0015  1683               	bsf	status, 5	;RP0=1, select bank1
+   323  0016  1303               	bcf	status, 6	;RP1=0, select bank1
+   324  0017  1405               	bsf	(1064/8)^080h,(1064)&7
+   325                           	line	46
+   326                           	
+   327  0018                     l2618:	
+   328                           ;adc_simples_int_button.c: 46: TRISB = 0b11111111;
+   329  0018  30FF               	movlw	(0FFh)
+   330  0019  0086               	movwf	(134)^080h	;volatile
+   331                           	line	47
+   332                           	
+   333  001A                     l2620:	
+   334                           ;adc_simples_int_button.c: 47: TRISB1 = 0;
+   335  001A  1086               	bcf	(1073/8)^080h,(1073)&7
+   336                           	line	48
+   337                           	
+   338  001B                     l2622:	
+   339                           ;adc_simples_int_button.c: 48: TRISB2 = 0;
+   340  001B  1106               	bcf	(1074/8)^080h,(1074)&7
+   341                           	line	49
+   342                           	
+   343  001C                     l2624:	
+   344                           ;adc_simples_int_button.c: 49: TRISB3 = 0;
+   345  001C  1186               	bcf	(1075/8)^080h,(1075)&7
+   346                           	line	54
+   347                           	
+   348  001D                     l2626:	
+   349                           ;adc_simples_int_button.c: 54: ADCS1 = 1;
+   350  001D  1283               	bcf	status, 5	;RP0=0, select bank0
+   351  001E  1303               	bcf	status, 6	;RP1=0, select bank0
+   352  001F  179F               	bsf	(255/8),(255)&7
+   353                           	line	55
+   354                           	
+   355  0020                     l2628:	
+   356                           ;adc_simples_int_button.c: 55: ADCS2 = 1;
+   357  0020  1683               	bsf	status, 5	;RP0=1, select bank1
+   358  0021  1303               	bcf	status, 6	;RP1=0, select bank1
+   359  0022  171F               	bsf	(1278/8)^080h,(1278)&7
+   360                           	line	56
+   361                           	
+   362  0023                     l2630:	
+   363                           ;adc_simples_int_button.c: 56: ADCS0 = 0;
+   364  0023  1283               	bcf	status, 5	;RP0=0, select bank0
+   365  0024  1303               	bcf	status, 6	;RP1=0, select bank0
+   366  0025  131F               	bcf	(254/8),(254)&7
+   367                           	line	58
+   368                           	
+   369  0026                     l2632:	
+   370                           ;adc_simples_int_button.c: 58: CHS0 = 0;
+   371  0026  119F               	bcf	(251/8),(251)&7
+   372                           	line	59
+   373                           	
+   374  0027                     l2634:	
+   375                           ;adc_simples_int_button.c: 59: CHS1 = 0;
+   376  0027  121F               	bcf	(252/8),(252)&7
+   377                           	line	60
+   378                           	
+   379  0028                     l2636:	
+   380                           ;adc_simples_int_button.c: 60: CHS2 = 0;
+   381  0028  129F               	bcf	(253/8),(253)&7
+   382                           	line	62
+   383                           	
+   384  0029                     l2638:	
+   385                           ;adc_simples_int_button.c: 62: ADFM = 0;
+   386  0029  1683               	bsf	status, 5	;RP0=1, select bank1
+   387  002A  1303               	bcf	status, 6	;RP1=0, select bank1
+   388  002B  139F               	bcf	(1279/8)^080h,(1279)&7
+   389                           	line	64
+   390                           	
+   391  002C                     l2640:	
+   392                           ;adc_simples_int_button.c: 64: PCFG3 = 1;
+   393  002C  159F               	bsf	(1275/8)^080h,(1275)&7
+   394                           	line	65
+   395                           	
+   396  002D                     l2642:	
+   397                           ;adc_simples_int_button.c: 65: PCFG2 = 1;
+   398  002D  151F               	bsf	(1274/8)^080h,(1274)&7
+   399                           	line	66
+   400                           	
+   401  002E                     l2644:	
+   402                           ;adc_simples_int_button.c: 66: PCFG1 = 1;
+   403  002E  149F               	bsf	(1273/8)^080h,(1273)&7
+   404                           	line	67
+   405                           	
+   406  002F                     l2646:	
+   407                           ;adc_simples_int_button.c: 67: PCFG0 = 0;
+   408  002F  101F               	bcf	(1272/8)^080h,(1272)&7
+   409                           	line	69
+   410                           	
+   411  0030                     l2648:	
+   412                           ;adc_simples_int_button.c: 69: INTE = 1;
+   413  0030  160B               	bsf	(92/8),(92)&7
+   414                           	line	70
+   415                           	
+   416  0031                     l2650:	
+   417                           ;adc_simples_int_button.c: 70: INTF = 0;
+   418  0031  108B               	bcf	(89/8),(89)&7
+   419                           	line	71
+   420                           	
+   421  0032                     l2652:	
+   422                           ;adc_simples_int_button.c: 71: INTEDG = 1;
+   423  0032  1701               	bsf	(1038/8)^080h,(1038)&7
+   424                           	line	72
+   425                           	
+   426  0033                     l2654:	
+   427                           ;adc_simples_int_button.c: 72: ADIF = 0;
+   428  0033  1283               	bcf	status, 5	;RP0=0, select bank0
+   429  0034  1303               	bcf	status, 6	;RP1=0, select bank0
+   430  0035  130C               	bcf	(102/8),(102)&7
+   431                           	line	73
+   432                           	
+   433  0036                     l2656:	
+   434                           ;adc_simples_int_button.c: 73: ADIE = 1;
+   435  0036  1683               	bsf	status, 5	;RP0=1, select bank1
+   436  0037  1303               	bcf	status, 6	;RP1=0, select bank1
+   437  0038  170C               	bsf	(1126/8)^080h,(1126)&7
+   438                           	line	74
+   439                           	
+   440  0039                     l2658:	
+   441                           ;adc_simples_int_button.c: 74: PEIE = 1;
+   442  0039  170B               	bsf	(94/8),(94)&7
+   443                           	line	75
+   444                           	
+   445  003A                     l2660:	
+   446                           ;adc_simples_int_button.c: 75: GIE = 1;
+   447  003A  178B               	bsf	(95/8),(95)&7
+   448                           	line	80
+   449                           	
+   450  003B                     l2662:	
+   451                           ;adc_simples_int_button.c: 80: RB1 = 1;
+   452  003B  1283               	bcf	status, 5	;RP0=0, select bank0
+   453  003C  1303               	bcf	status, 6	;RP1=0, select bank0
+   454  003D  1486               	bsf	(49/8),(49)&7
+   455                           	line	81
+   456                           ;adc_simples_int_button.c: 81: _delay((unsigned long)((500)*(20000000/4000.0)));
+   457                           	opt asmopt_off
+   458  003E  300D               movlw  13
+   459  003F  00F7               movwf	((??_main+0)+0+2),f
+   460  0040  30AF               movlw	175
+   461  0041  00F6               movwf	((??_main+0)+0+1),f
+   462  0042  30C1               	movlw	193
+   463  0043  00F5               movwf	((??_main+0)+0),f
+   464  0044                     u2277:
+   465  0044  0BF5               	decfsz	((??_main+0)+0),f
+   466  0045  2844               	goto	u2277
+   467  0046  0BF6               	decfsz	((??_main+0)+0+1),f
+   468  0047  2844               	goto	u2277
+   469  0048  0BF7               	decfsz	((??_main+0)+0+2),f
+   470  0049  2844               	goto	u2277
+   471  004A  0064               	clrwdt
+   472                           opt asmopt_on
+   473                           
+   474                           	line	82
+   475                           	
+   476  004B                     l2664:	
+   477                           ;adc_simples_int_button.c: 82: RB1 = 0;
+   478  004B  1283               	bcf	status, 5	;RP0=0, select bank0
+   479  004C  1303               	bcf	status, 6	;RP1=0, select bank0
+   480  004D  1086               	bcf	(49/8),(49)&7
+   481                           	line	83
+   482                           ;adc_simples_int_button.c: 83: _delay((unsigned long)((500)*(20000000/4000.0)));
+   483                           	opt asmopt_off
+   484  004E  300D               movlw  13
+   485  004F  00F7               movwf	((??_main+0)+0+2),f
+   486  0050  30AF               movlw	175
+   487  0051  00F6               movwf	((??_main+0)+0+1),f
+   488  0052  30C1               	movlw	193
+   489  0053  00F5               movwf	((??_main+0)+0),f
+   490  0054                     u2287:
+   491  0054  0BF5               	decfsz	((??_main+0)+0),f
+   492  0055  2854               	goto	u2287
+   493  0056  0BF6               	decfsz	((??_main+0)+0+1),f
+   494  0057  2854               	goto	u2287
+   495  0058  0BF7               	decfsz	((??_main+0)+0+2),f
+   496  0059  2854               	goto	u2287
+   497  005A  0064               	clrwdt
+   498                           opt asmopt_on
+   499                           
+   500                           	line	84
+   501                           	
+   502  005B                     l2666:	
+   503                           ;adc_simples_int_button.c: 84: RB1 = 1;
+   504  005B  1283               	bcf	status, 5	;RP0=0, select bank0
+   505  005C  1303               	bcf	status, 6	;RP1=0, select bank0
+   506  005D  1486               	bsf	(49/8),(49)&7
+   507                           	line	85
+   508                           ;adc_simples_int_button.c: 85: _delay((unsigned long)((500)*(20000000/4000.0)));
+   509                           	opt asmopt_off
+   510  005E  300D               movlw  13
+   511  005F  00F7               movwf	((??_main+0)+0+2),f
+   512  0060  30AF               movlw	175
+   513  0061  00F6               movwf	((??_main+0)+0+1),f
+   514  0062  30C1               	movlw	193
+   515  0063  00F5               movwf	((??_main+0)+0),f
+   516  0064                     u2297:
+   517  0064  0BF5               	decfsz	((??_main+0)+0),f
+   518  0065  2864               	goto	u2297
+   519  0066  0BF6               	decfsz	((??_main+0)+0+1),f
+   520  0067  2864               	goto	u2297
+   521  0068  0BF7               	decfsz	((??_main+0)+0+2),f
+   522  0069  2864               	goto	u2297
+   523  006A  0064               	clrwdt
+   524                           opt asmopt_on
+   525                           
+   526                           	line	86
+   527                           	
+   528  006B                     l2668:	
+   529                           ;adc_simples_int_button.c: 86: RB1 = 0;
+   530  006B  1283               	bcf	status, 5	;RP0=0, select bank0
+   531  006C  1303               	bcf	status, 6	;RP1=0, select bank0
+   532  006D  1086               	bcf	(49/8),(49)&7
+   533                           	line	87
+   534                           ;adc_simples_int_button.c: 87: _delay((unsigned long)((500)*(20000000/4000.0)));
+   535                           	opt asmopt_off
+   536  006E  300D               movlw  13
+   537  006F  00F7               movwf	((??_main+0)+0+2),f
+   538  0070  30AF               movlw	175
+   539  0071  00F6               movwf	((??_main+0)+0+1),f
+   540  0072  30C1               	movlw	193
+   541  0073  00F5               movwf	((??_main+0)+0),f
+   542  0074                     u2307:
+   543  0074  0BF5               	decfsz	((??_main+0)+0),f
+   544  0075  2874               	goto	u2307
+   545  0076  0BF6               	decfsz	((??_main+0)+0+1),f
+   546  0077  2874               	goto	u2307
+   547  0078  0BF7               	decfsz	((??_main+0)+0+2),f
+   548  0079  2874               	goto	u2307
+   549  007A  0064               	clrwdt
+   550                           opt asmopt_on
+   551                           
+   552                           	line	90
+   553                           	
+   554  007B                     l2670:	
+   555                           ;adc_simples_int_button.c: 90: ADON = 1;
+   556  007B  1283               	bcf	status, 5	;RP0=0, select bank0
+   557  007C  1303               	bcf	status, 6	;RP1=0, select bank0
+   558  007D  141F               	bsf	(248/8),(248)&7
+   559  007E  287F               	goto	l2672
+   560                           	line	96
+   561                           ;adc_simples_int_button.c: 96: while(1)
+   562                           	
+   563  007F                     l694:	
+   564                           	line	107
+   565                           	
+   566  007F                     l2672:	
+   567                           ;adc_simples_int_button.c: 97: {
+   568                           ;adc_simples_int_button.c: 107: if((data&0b10000000) == 0b10000000){RB3=1;}else{RB3=0;}
+   569  007F  1FF8               	btfss	(_data),(7)&7
+   570  0080  2882               	goto	u2241
+   571  0081  2883               	goto	u2240
+   572  0082                     u2241:
+   573  0082  2885               	goto	l695
+   574  0083                     u2240:
+   575                           	
+   576  0083                     l2674:	
+   577  0083  1586               	bsf	(51/8),(51)&7
+   578  0084  2886               	goto	l696
+   579                           	
+   580  0085                     l695:	
+   581  0085  1186               	bcf	(51/8),(51)&7
+   582                           	
+   583  0086                     l696:	
+   584                           	line	108
+   585                           ;adc_simples_int_button.c: 108: if((data&0b01000000) == 0b01000000){RB2=1;}else{RB2=0;}
+   586  0086  1F78               	btfss	(_data),(6)&7
+   587  0087  2889               	goto	u2251
+   588  0088  288A               	goto	u2250
+   589  0089                     u2251:
+   590  0089  288C               	goto	l697
+   591  008A                     u2250:
+   592                           	
+   593  008A                     l2676:	
+   594  008A  1506               	bsf	(50/8),(50)&7
+   595  008B  288D               	goto	l698
+   596                           	
+   597  008C                     l697:	
+   598  008C  1106               	bcf	(50/8),(50)&7
+   599                           	
+   600  008D                     l698:	
+   601                           	line	109
+   602                           ;adc_simples_int_button.c: 109: if((data&0b00100000) == 0b00100000){RB1=1;}else{RB1=0;}
+   603  008D  1EF8               	btfss	(_data),(5)&7
+   604  008E  2890               	goto	u2261
+   605  008F  2891               	goto	u2260
+   606  0090                     u2261:
+   607  0090  2893               	goto	l699
+   608  0091                     u2260:
+   609                           	
+   610  0091                     l2678:	
+   611  0091  1486               	bsf	(49/8),(49)&7
+   612  0092  287F               	goto	l2672
+   613                           	
+   614  0093                     l699:	
+   615  0093  1086               	bcf	(49/8),(49)&7
+   616  0094  287F               	goto	l2672
+   617                           	
+   618  0095                     l700:	
+   619  0095  287F               	goto	l2672
+   620                           	line	113
+   621                           	
+   622  0096                     l701:	
+   623                           	line	96
+   624  0096  287F               	goto	l2672
+   625                           	
+   626  0097                     l702:	
+   627                           	line	115
+   628                           	
+   629  0097                     l703:	
+   630                           	global	start
+   631  0097  120A  118A  2812   	ljmp	start
+   632                           	opt stack 0
+   633                           GLOBAL	__end_of_main
+   634  009A                     	__end_of_main:
+   635 ;; =============== function _main ends ============
+   636                           
+   637                           	signat	_main,88
+   638                           	global	_interupt
+   639                           psect	text77,local,class=CODE,delta=2
+   640                           global __ptext77
+   641  009A                     __ptext77:
+   642                           
+   643 ;; *************** function _interupt *****************
+   644 ;; Defined at:
+   645 ;;		line 18 in file "C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\adc_simples_int_but
+       ton\adc_simples_int_button.c"
+   646 ;; Parameters:    Size  Location     Type
+   647 ;;		None
+   648 ;; Auto vars:     Size  Location     Type
+   649 ;;		None
+   650 ;; Return value:  Size  Location     Type
+   651 ;;		None               void
+   652 ;; Registers used:
+   653 ;;		wreg
+   654 ;; Tracked objects:
+   655 ;;		On entry : 0/0
+   656 ;;		On exit  : 0/0
+   657 ;;		Unchanged: 0/0
+   658 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   659 ;;      Params:         0       0       0       0       0
+   660 ;;      Locals:         0       0       0       0       0
+   661 ;;      Temps:          5       0       0       0       0
+   662 ;;      Totals:         5       0       0       0       0
+   663 ;;Total ram usage:        5 bytes
+   664 ;; Hardware stack levels used:    1
+   665 ;; This function calls:
+   666 ;;		Nothing
+   667 ;; This function is called by:
+   668 ;;		Interrupt level 1
+   669 ;; This function uses a non-reentrant model
+   670 ;;
+   671                           psect	text77
+   672                           	file	"C:\Documents and Settings\Admin\Desktop\Microcontroladores - Felipe, Gugu e Bia\a
+                                 dc_simples_int_button\adc_simples_int_button.c"
+   673                           	line	18
+   674                           	global	__size_of_interupt
+   675  001B                     	__size_of_interupt	equ	__end_of_interupt-_interupt
+   676                           	
+   677  009A                     _interupt:	
+   678                           	opt	stack 7
+   679                           ; Regs used in _interupt: [wreg]
+   680                           psect	intentry,class=CODE,delta=2
+   681                           global __pintentry
+   682  0004                     __pintentry:
+   683                           global interrupt_function
+   684  0004                     interrupt_function:
+   685                           	global saved_w
+   686  007E                     	saved_w	set	btemp+0
+   687  0004  00FE               	movwf	saved_w
+   688  0005  0E03               	swapf	status,w
+   689  0006  00F1               	movwf	(??_interupt+1)
+   690  0007  0804               	movf	fsr0,w
+   691  0008  00F2               	movwf	(??_interupt+2)
+   692  0009  080A               	movf	pclath,w
+   693  000A  00F3               	movwf	(??_interupt+3)
+   694  000B  1283               	bcf	status, 5	;RP0=0, select bank0
+   695  000C  1303               	bcf	status, 6	;RP1=0, select bank0
+   696  000D  087F               	movf	btemp+1,w
+   697  000E  00F4               	movwf	(??_interupt+4)
+   698  000F  120A  118A  289A   	ljmp	_interupt
+   699                           psect	text77
+   700                           	line	20
+   701                           	
+   702  009A                     i1l1750:	
+   703                           ;adc_simples_int_button.c: 20: if(INTF)
+   704  009A  1C8B               	btfss	(89/8),(89)&7
+   705  009B  289D               	goto	u1_21
+   706  009C  289E               	goto	u1_20
+   707  009D                     u1_21:
+   708  009D  28A0               	goto	i1l689
+   709  009E                     u1_20:
+   710                           	line	22
+   711                           	
+   712  009E                     i1l1752:	
+   713                           ;adc_simples_int_button.c: 21: {
+   714                           ;adc_simples_int_button.c: 22: GO_DONE = 1;
+   715  009E  151F               	bsf	(250/8),(250)&7
+   716                           	line	24
+   717                           ;adc_simples_int_button.c: 24: INTF = 0;
+   718  009F  108B               	bcf	(89/8),(89)&7
+   719                           	line	25
+   720                           	
+   721  00A0                     i1l689:	
+   722                           	line	27
+   723                           ;adc_simples_int_button.c: 25: }
+   724                           ;adc_simples_int_button.c: 27: if(ADIF)
+   725  00A0  1F0C               	btfss	(102/8),(102)&7
+   726  00A1  28A3               	goto	u2_21
+   727  00A2  28A4               	goto	u2_20
+   728  00A3                     u2_21:
+   729  00A3  28AA               	goto	i1l691
+   730  00A4                     u2_20:
+   731                           	line	29
+   732                           	
+   733  00A4                     i1l1754:	
+   734                           ;adc_simples_int_button.c: 28: {
+   735                           ;adc_simples_int_button.c: 29: data = ADRESH;
+   736  00A4  081E               	movf	(30),w	;volatile
+   737  00A5  00F0               	movwf	(??_interupt+0)+0
+   738  00A6  0870               	movf	(??_interupt+0)+0,w
+   739  00A7  00F8               	movwf	(_data)
+   740                           	line	31
+   741                           	
+   742  00A8                     i1l1756:	
+   743                           ;adc_simples_int_button.c: 31: ADIF = 0;
+   744  00A8  130C               	bcf	(102/8),(102)&7
+   745  00A9  28AA               	goto	i1l691
+   746                           	line	32
+   747                           	
+   748  00AA                     i1l690:	
+   749                           	line	34
+   750                           	
+   751  00AA                     i1l691:	
+   752  00AA  0874               	movf	(??_interupt+4),w
+   753  00AB  00FF               	movwf	btemp+1
+   754  00AC  0873               	movf	(??_interupt+3),w
+   755  00AD  008A               	movwf	pclath
+   756  00AE  0872               	movf	(??_interupt+2),w
+   757  00AF  0084               	movwf	fsr0
+   758  00B0  0E71               	swapf	(??_interupt+1)^0FFFFFF80h,w
+   759  00B1  0083               	movwf	status
+   760  00B2  0EFE               	swapf	saved_w,f
+   761  00B3  0E7E               	swapf	saved_w,w
+   762  00B4  0009               	retfie
+   763                           	opt stack 0
+   764                           GLOBAL	__end_of_interupt
+   765  00B5                     	__end_of_interupt:
+   766 ;; =============== function _interupt ends ============
+   767                           
+   768                           	signat	_interupt,88
+   769                           psect	text78,local,class=CODE,delta=2
+   770                           global __ptext78
+   771  0000                     __ptext78:
+   772                           	global	btemp
+   773  007E                     	btemp set 07Eh
+   774                           
+   775                           	DABS	1,126,2	;btemp
+   776                           	global	wtemp0
+   777  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.83 build 10920 
+Symbol Table                                                                                   Fri Oct 04 18:49:07 2013
+
+                  _RD 0C60                    _WR 0C61                   l700 0095                   l701 0096  
+                 l702 0097                   l703 0097                   l694 007F                   l695 0085  
+                 l696 0086                   l697 008C                   l698 008D                   l699 0093  
+                 _GIE 005F                   _RB1 0031                   _RB2 0032                   _RB3 0033  
+                 fsr0 0004                  l2620 001A                  l2630 0023                  l2622 001B  
+                l2640 002C                  l2632 0026                  l2624 001C                  l2616 0015  
+                l2650 0031                  l2642 002D                  l2634 0027                  l2626 001D  
+                l2618 0018                  l2660 003A                  l2652 0032                  l2644 002E  
+                l2636 0028                  l2628 0020                  l2670 007B                  l2662 003B  
+                l2654 0033                  l2646 002F                  l2638 0029                  l2672 007F  
+                l2664 004B                  l2656 0036                  l2648 0030                  l2674 0083  
+                l2666 005B                  l2658 0039                  l2676 008A                  l2668 006B  
+                l2678 0091                  _ADIE 0466                  _ADIF 0066                  _ADFM 04FF  
+                _ADON 00F8                  _CHS0 00FB                  _CHS1 00FC                  _CHS2 00FD  
+                u2240 0083                  u2241 0082                  u2250 008A                  u2251 0089  
+                u2307 0074                  u2260 0091                  u2261 0090                  u2277 0044  
+                u2287 0054                  u2297 0064                  _PEIE 005E                  _INTE 005C  
+                _INTF 0059                  _WREN 0C62                  u1_20 009E                  u1_21 009D  
+                u2_20 00A4                  u2_21 00A3                  _data 0078                  _main 0015  
+                btemp 007E                  start 0012                 _ADCS0 00FE                 _ADCS1 00FF  
+               _ADCS2 04FE                 ?_main 0070                 _EEADR 010D                 _CARRY 0018  
+               _PCFG0 04F8                 _PCFG1 04F9                 _PCFG2 04FA                 _PCFG3 04FB  
+               i1l690 00AA                 i1l691 00AA                 i1l689 00A0                 _TRISB 0086  
+               pclath 000A                 status 0003                 wtemp0 007E          __end_of_main 009A  
+              ??_main 0075                _ADRESH 001E                _EEDATA 010C                _EECON1 018C  
+              _EECON2 018D                i1l1750 009A                i1l1752 009E                i1l1754 00A4  
+              i1l1756 00A8                _INTEDG 040E                _TRISA0 0428                _TRISB1 0431  
+              _TRISB2 0432                _TRISB3 0433      __end_of_interupt 00B5                saved_w 007E  
+      __pcstackCOMMON 0070            __pmaintext 0015            __pintentry 0004               _GO_DONE 00FA  
+           ?_interupt 0070  end_of_initialization 00B6            ??_interupt 0070   start_initialization 00B5  
+         __pbssCOMMON 0078     __size_of_interupt 001B     interrupt_function 0004              __ptext77 009A  
+            __ptext78 0000         __size_of_main 0085              _interupt 009A              intlevel1 0000  
